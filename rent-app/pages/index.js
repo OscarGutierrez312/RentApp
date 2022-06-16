@@ -23,17 +23,23 @@ export default function Home() {
 
         <div className={styles.grid}>
           
-            
-          <a href="/Sesion/login" className={styles.card}>
+        <Link href="/Sesion/login">
+          <a  className={styles.card}>
             <h2>Login &rarr;</h2>
             <p>Inicia Sesión en la aplicación.</p>
           </a>
-            
+        </Link>    
           
-          <a href="/Sesion/signup" className={styles.card}>
+            
+        <Link  href="/Sesion/signup">
+          <a className={styles.card}>
             <h2>Sign Up &rarr;</h2>
             <p>Registrate en la aplicación.</p>
           </a>
+        </Link>
+
+        
+          
         </div>
       </main>
 
