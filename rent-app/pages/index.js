@@ -14,11 +14,11 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Bienvenido a RentCar
+          Bienvenido a EasyCar
         </h1>
 
         <p className={styles.description}>
-          
+          Ejemplo de descripción de la página de inicio de la aplicación de renta de vehiculos
         </p>
 
         <div className={styles.grid}>
