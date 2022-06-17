@@ -1,6 +1,6 @@
 import Link from "next/link"
 import {signIn, signOut, useSession} from "next-auth/react"
-
+import Layout from "../../components/layout"
 
 export default function Login(){
 
@@ -8,7 +8,7 @@ export default function Login(){
     const loading = status === "loading"
 
     return (
-        <LayoutSesion>
+        <Layout>
             <script>
                 preventDefault()
                 signIn()
@@ -17,6 +17,6 @@ export default function Login(){
                 <h1>Página de Login</h1>
                 
             </div> 
-        </LayoutSesion>       
+        </Layout>       
     );
 }

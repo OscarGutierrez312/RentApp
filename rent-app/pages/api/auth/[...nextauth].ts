@@ -22,11 +22,20 @@ export default NextAuth({
     },
 
     callbacks: {
-        async jwt({token}){
-            token.userRole = "admin"
-            return token
+        async jwt({token, user}){
+            if(user){
+                token.userRole = "admin"
+                return token
+            }            
         },
+        async session({ session, token }) {
+            if (token) {
+                session.userRole = token.userRole;
+            }
+            return session;
+        }
     },
 })
+
 
     
