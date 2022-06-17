@@ -17,26 +17,32 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Bienvenido a RentCar
+          Bienvenido a EasyCar
         </h1>
 
         <p className={styles.description}>
-          
+          Ejemplo de descripción de la página de inicio de la aplicación de renta de vehiculos
         </p>
 
         <div className={styles.grid}>
           
-            
-          <a href="/Sesion/login" className={styles.card}>
+        <Link href="/Sesion/login">
+          <a  className={styles.card}>
             <h2>Login &rarr;</h2>
             <p>Inicia Sesión en la aplicación.</p>
           </a>
-            
+        </Link>    
           
-          <a href="/Sesion/signup" className={styles.card}>
+            
+        <Link  href="/Sesion/signup">
+          <a className={styles.card}>
             <h2>Sign Up &rarr;</h2>
             <p>Registrate en la aplicación.</p>
           </a>
+        </Link>
+
+        
+          
         </div>
       </main>
 
