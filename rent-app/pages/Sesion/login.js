@@ -8,10 +8,9 @@ export default function Login({providers}){
     
     
     return (
-        <Layout>
-            
+        <Layout>            
             <div>
-                <h1>Página de Login</h1>
+                <h1 className="text-9xl auto-rows-auto">Página de Login</h1>
                 {Object.values(providers).map((provider) => (
                     <div key={provider.name}>
                         <button onClick={() => signIn(provider.id, {callbackUrl: "/"})}>
