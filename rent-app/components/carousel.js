@@ -7,11 +7,15 @@ import { Carousel } from 'react-responsive-carousel';
 export default class NextJsCarousel extends Component {
 	render() {
         const data =[
-            {"name":"/images/Escudo_UD.png", "id":"Image 1"},
-            {"name":"/images/Escudo_UD.png", "id":"Image 2"},
-            {"name":"/images/Escudo_UD.png", "id":"Image 3"},
-            {"name":"/images/Escudo_UD.png", "id":"Image 4"},
-            {"name":"/images/Escudo_UD.png", "id":"Image 5"},
+            {"name":"/images/car_1.jpg", "id":"Vehicle 1"},
+            {"name":"/images/car_2.jpg", "id":"Vehicle 2"},
+            {"name":"/images/car_3.jpg", "id":"Vehicle 3"},
+            {"name":"/images/moto_1.jpg", "id":"MotorBike 1"},
+            {"name":"/images/moto_2.jpg", "id":"MotorBike 2"},
+            {"name":"/images/moto_3.jpg", "id":"MotorBike 3"},
+            {"name":"/images/bici_1.jpg", "id":"Bicycle 1"},
+            {"name":"/images/bici_2.jpg", "id":"Bicycle 2"},
+            {"name":"/images/bici_3.jpg", "id":"Bicycle 3"},
         ];
 		return (
 			<div className="flex flex-col space-y-20">
@@ -33,8 +37,8 @@ export default class NextJsCarousel extends Component {
 			    <Carousel showArrows={true} stopOnHover showThumbs={false} infiniteLoop autoPlay>                
                 {data.map(function(i, idx){
                     return (                        
-                    <div key={idx} className="flex-place-items-center">
-                        <Image src={i.name} alt={idx} width={250} height={250}/>
+                    <div key={idx} className="flex-place-items-center z-0">
+                        <Image src={i.name} alt={idx} width={'100%'} height={'40'} layout={'responsive'} />
                         <p className="legend">{i.id}</p>
                     </div>
                     )

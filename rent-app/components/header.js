@@ -10,11 +10,11 @@ export default function Header(){
     return(
         <header className="z-0">
             <nav
-                class="navbar navbar-expand-md shadow-lg py-2 bg-white flex items-stretch w-full justify-between fixed top-0 right-0 left-0"
+                className="navbar navbar-expand-md shadow-lg py-2 bg-white flex items-stretch w-full justify-between fixed top-0 right-0 left-0"
             >
-            <div class="px-6">
+            <div className="px-6">
                 <button
-                    class="navbar-toggler border-0 py-3 px-2 md:hidden leading-none text-xl bg-transparent text-gray-600 hover:text-gray-700 focus:text-gray-700 transition-shadow duration-150 ease-in-out"
+                    className="navbar-toggler border-0 py-3 px-2 md:hidden leading-none text-xl bg-transparent text-gray-600 hover:text-gray-700 focus:text-gray-700 transition-shadow duration-150 ease-in-out"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContentM"
@@ -26,7 +26,7 @@ export default function Header(){
                     aria-hidden="true"
                     focusable="false"
                     data-prefix="fas"
-                    class="w-5"
+                    className="w-5"
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512"
@@ -37,41 +37,41 @@ export default function Header(){
                     ></path>
                     </svg>
                 </button>
-                <div class="navbar-collapse collapse grow items-center z-0" id="navbarSupportedContentM">
-                    <ul class="navbar-nav mr-auto flex flex-col md:flex-row">
-                    <li class="nav-item">
+                <div className="navbar-collapse collapse grow items-center z-0" id="navbarSupportedContentM">
+                    <ul className="navbar-nav mr-auto flex flex-col md:flex-row">
+                    <li className="nav-item">
                         <Link href="/">
                             <a
-                            class="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
+                            className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
                             >Inicio</a>
                         </Link>
                         
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <Link href="#!">
                             <a
-                            class="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
+                            className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
                             >Vehiculos</a>
                         </Link>                            
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <Link href="">
                             <a
-                            class="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
+                            className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
                             >Motocicletas</a>
                         </Link>
                         
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <Link href="#!">
                             <a
-                            class="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
+                            className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
                             >Bicicletas</a>
