@@ -4,17 +4,23 @@ import styles from "./footer.module.css"
 export default function Header(){
 
     return (
-    <footer className={styles.footer}>
-        <a
+    <footer class="text-white bg-gray-200" className={styles.footer}>
+      <div class="grid place-items-center bg-gray-200 p-6">    
+        
+        <a class="flex items-center text-gray-600 font-semibold"
           href="https://www.udistrital.edu.co/inicio"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
+        > 
+          
+          <span>© 2022 Copyright:</span>
+          <span>
             <Image src='/images/Escudo_UD.png' alt="Escudo Distrital" width={50} height={50} />
           </span>
         </a>
+           
+      </div>
+        
       </footer>
     );
 }
