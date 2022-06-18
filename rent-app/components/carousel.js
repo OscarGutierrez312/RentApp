@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { Component } from 'react';
 import { ReactDOM } from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -18,28 +19,28 @@ export default class NextJsCarousel extends Component {
             {"name":"/images/bici_3.jpg", "id":"Bicycle 3"},
         ];
 		return (
-			<div className="flex flex-col space-y-20">
-                <div className="flex justify-center">
-                    <div className="block pt-20 rounded-lg bg-white max-w-sm">
-                        <div className="flex space-x-2  justify-center">
-                            <h1 className="text-6xl inline-block py-2 px-2.5
-                                            align-text-top whitespace-nowrap text-center
-                                            font-thin bg-blue-400 text-white rounded">
-                                Bienvenido a EasyCar
-                            </h1>
-                        </div>                    
-                        <p >
-                        Ejemplo de descripción de la página de inicio de la aplicación de renta de vehiculos
-                        </p> 
-                    </div>
+            
+			<div className="flex flex-col bg-gray-200">
+                <div class="text-center bg-gray-50 text-gray-800 p-20 px-6">
+                    <h1 class="text-5xl font-bold mt-0 mb-6">Bienvenido a EasyCar</h1>
+                    <h3 class="text-2xl font-thin mb-8">
+                        Pide o Arrienda cualquiera de 
+                    los tipos de vehiculos disponibles</h3>
                 </div>
-                 
-			    <Carousel showArrows={true} stopOnHover showThumbs={false} infiniteLoop autoPlay>                
+                <Carousel showArrows={true} showIndicators={false} stopOnHover showThumbs={false} infiniteLoop autoPlay>                
                 {data.map(function(i, idx){
                     return (                        
                     <div key={idx} className="flex-place-items-center z-0">
-                        <Image src={i.name} alt={idx} width={'100%'} height={'40'} layout={'responsive'} />
-                        <p className="legend">{i.id}</p>
+                        <Image src={i.name} alt={idx} width={'100%'} height={'36'} layout={'responsive'} />
+                        <div class="carousel-caption hidden md:block absolute text-center pb-20 ">
+                            <h5 class="text-xl">First slide label</h5>
+                            <p>Some representative placeholder content for the first slide.</p>
+                        </div>
+                        <Link href="/Sesion/logout">
+                            <button >
+                                <p className="legend">{i.id}</p>
+                            </button>
+                        </Link>                      
                     </div>
                     )
                 })}				

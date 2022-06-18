@@ -12,7 +12,7 @@ export default function Header(){
             <nav
                 className="navbar navbar-expand-md shadow-lg py-2 bg-white flex items-stretch w-full justify-between fixed top-0 right-0 left-0"
             >
-            <div className="px-6">
+            <div className="px-6 w-full flex flex-wrap items-center justify-between">
                 <button
                     className="navbar-toggler border-0 py-3 px-2 md:hidden leading-none text-xl bg-transparent text-gray-600 hover:text-gray-700 focus:text-gray-700 transition-shadow duration-150 ease-in-out"
                     type="button"
@@ -38,7 +38,7 @@ export default function Header(){
                     </svg>
                 </button>
                 <div className="navbar-collapse collapse grow items-center z-0" id="navbarSupportedContentM">
-                    <ul className="navbar-nav mr-auto flex flex-col md:flex-row">
+                    <ul className="navbar-nav mr-auto flex flex-col lg:flex lg:flex-row md:flex-row">
                     <li className="nav-item">
                         <Link href="/">
                             <a
@@ -84,13 +84,14 @@ export default function Header(){
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
                 {!session ? 
                 <Link href="/Sesion/login">
-                    <a
+                    <button
                     className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                     >
                     Sign in
-                    </a>
+                    </button>
                 </Link>
                  : <button 
+                    className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                         onClick={(e) => {
                             e.preventDefault();
                             signOut();
