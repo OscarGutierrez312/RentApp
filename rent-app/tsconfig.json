@@ -20,12 +20,12 @@
     "module": "esnext",
   },
   "include": [
-    "process.d.ts",
-    "next-env.d.ts",
-    "next-auth.d.ts",
+    "process.d.js",
+    "next-env.d.js",
+    "next-auth.d.js",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/header.js", "components/layout.js", "pages/api/auth/[...nextauth].js", "pages/api/auth/jwt.js", "pages/api/auth/protected.js", "pages/api/auth/session.js", "pages/_app.js", "pages/index.js"  ],
   "exclude": [
     "node_modules"
   ]

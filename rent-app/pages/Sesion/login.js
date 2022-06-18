@@ -1,22 +1,37 @@
 import Link from "next/link"
-import {signIn, signOut, useSession} from "next-auth/react"
+import {getProviders, getSession, signIn, signOut, useSession} from "next-auth/react"
 import Layout from "../../components/layout"
 
-export default function Login(){
+export default function Login({providers}){
 
     const {data: session, status} = useSession()
-    const loading = status === "loading"
-
+    
+    
     return (
         <Layout>
-            <script>
-                preventDefault()
-                signIn()
-            </script>
+            
             <div>
                 <h1>Página de Login</h1>
-                
+                {Object.values(providers).map((provider) => (
+                    <div key={provider.name}>
+                        <button onClick={() => signIn(provider.id, {callbackUrl: "/"})}>
+                            <span>Sign in with {provider.name}</span>
+                        </button>
+                    </div>
+                ))}
             </div> 
         </Layout>       
     );
+}
+
+export async function getServerSideProps(context){
+    const providers = await getProviders();
+    const session = await getSession(context);
+
+    return{
+        props:{
+            providers,
+            session,
+        },
+    }
 }
