@@ -13,7 +13,7 @@ export default function Preview(){
           rel="noopener noreferrer"
         > 
           
-          <span>© 2022 Copyright:</span>
+          <span>© 2022 Copyright preview page:</span>
           <span>
             <Image src='/images/Escudo_UD.png' alt="Escudo Distrital" width={50} height={50} />
           </span>

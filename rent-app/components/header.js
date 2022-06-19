@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { useState, useEffect } from "react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import styles from "./header.module.css"
@@ -6,6 +7,11 @@ import styles from "./header.module.css"
 export default function Header(){
     
     const {data: session, status} = useSession()
+    const infoV = {id:"0"};
+    const infoMc = {id:"1"}
+    const infoBc = {id:"2"};
+
+    
 
     return(
         <header className="z-0">
@@ -50,7 +56,9 @@ export default function Header(){
                         
                     </li>
                     <li className="nav-item">
-                        <Link href="#!">
+                        <Link href={{
+                            pathname:"/Products/catalogue",
+                            query: infoV,}}>
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
@@ -59,7 +67,9 @@ export default function Header(){
                         </Link>                            
                     </li>
                     <li className="nav-item">
-                        <Link href="">
+                        <Link href={{
+                            pathname:"/Products/catalogue",
+                            query: infoMc}}>
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
@@ -69,7 +79,9 @@ export default function Header(){
                         
                     </li>
                     <li className="nav-item">
-                        <Link href="#!">
+                        <Link href={{
+                            pathname:"/Products/catalogue",
+                            query: infoBc}}>
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
@@ -83,21 +95,36 @@ export default function Header(){
                 {!session ?     
                     <Link href="/Sesion/login">
                         <button
-                        className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                        className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
                         >
                             Sign in                    
                         </button>
                     </Link>            
                     
                 
-                 : <button 
-                    className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            signOut();
-                        }}>
-                        LogOut
-                    </button>
+                 : 
+                 <div className="grid grid-flow-col auto-cols-max gap-x-3 items-center">
+                    <div >{session.user.name}</div>
+                    <div >
+                        <button 
+                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                signOut();
+                            }}>
+                            LogOut
+                        </button>
+                    </div>
+                    <div >
+                        <img
+                            src={session.user.image}
+                            className="rounded-lg w-12 hover:scale-125 transition duration-300 ease-in-out"
+                            alt="Avatar"                           
+                        />
+                    </div>
+                 
+                    
+                </div>
                 }
                 </div>
             </div>
