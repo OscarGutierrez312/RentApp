@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {useRouter} from "next/router";
+import { isUndefined } from "util";
 import LayoutCatalogue from "../../components/layout_catalogue";
 
 export default function Catalogue(){
@@ -19,8 +20,11 @@ export default function Catalogue(){
             {"title":"Bicicleta 2", "desc":"Descripción Bicicleta 2", "img":"/images/bici_2.jpg", "time":"last updated"},
             {"title":"Bicicleta 3", "desc":"Descripción Bicicleta 3", "img":"/images/bici_3.jpg", "time":"last updated"}]}
     ];
-
-    const products=all[name][name];
+    const products = new Array();
+    products.push(all[name][name])
+    if(!(name == undefined)){            
+      all[name][name].map(function(i){products.push(i)})
+    }    
     
     return (
       <LayoutCatalogue>
