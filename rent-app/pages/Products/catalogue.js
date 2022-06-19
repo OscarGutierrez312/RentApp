@@ -6,8 +6,12 @@ import LayoutCatalogue from "../../components/layout_catalogue";
 export default function Catalogue(){
 
     const router = useRouter();
-    const query = router.query;
-    const name = query.id;
+    if(!(router.query==undefined)){
+      const query = router.query;
+      const name = query.id;
+    }
+    
+    
 
     const all =[
       {"0":[{"title":"Vehiculo 1", "desc":"Descripción Vehiculo 1", "img":"/images/car_1.jpg", "time":"last updated"},
