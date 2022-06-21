@@ -31,10 +31,10 @@ export default function Catalogue(){
         <div className="flex flex-col justify-center my-20 bg-blend-color">          
         {products.map(function(i, idx){
                     return (      
-                      <Link href="/Products/preview_product">
+                      <Link key={idx} href="/Products/preview_product">
                         <div key={idx} className="flex justify-center m-10">
                           <div className="flex flex-col min-w-full md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg ring-2 ring-blue-500 hover:scale-95 hover:ring-8 transition duration-150 ease-in-out">
-                            <img className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg" src={i.img} alt="" />
+                            <img className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg" src={i.img} alt="img" />
                             <div className="p-6 flex flex-col justify-start">
                               <h5 className="text-gray-900 text-xl font-medium mb-2">{i.title}</h5>
                               <p className="text-gray-700 text-base mb-4">

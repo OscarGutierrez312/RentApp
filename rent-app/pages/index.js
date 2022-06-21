@@ -15,7 +15,7 @@ export default function Home(providers) {
             <h2 className="text-7xl italic text-[#e8b984]">Manual de Solicitud</h2>
             <div className="flex justify-center m-10">
               <div className="flex flex-col min-w-fit min-h-fit max-w-lg md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg ring-2 ring-[#d3f5e6] hover:scale-110 transition duration-150 ease-in-out">
-                <img className=" w-full h-96 md:h-auto object-cover md:w-48 md:rounded-none md:rounded-l-lg" src="/images/manual.jpg" alt="" />
+                <img className=" w-full h-96 md:h-auto object-cover md:w-48 md:rounded-none md:rounded-l-lg" src="/images/manual.jpg" alt="img" />
                 <div className="p-6 flex flex-col justify-start">
                   <h5 className="text-gray-900 text-xl font-medium mb-2">Paso a Paso</h5>
                   <p className="text-gray-700 text-base mb-4">
@@ -31,7 +31,7 @@ export default function Home(providers) {
             <h2 className="text-7xl italic text-[#e8b984]">Vehículos Asegurados</h2>
             <div className="flex justify-center m-10">
               <div className="flex flex-col min-w-fit min-h-fit max-w-lg md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg ring-2 ring-[#d3f5e6] hover:scale-110 transition duration-150 ease-in-out">
-                <img className=" w-full h-96 md:h-auto object-cover md:w-48 md:rounded-none md:rounded-l-lg" src="/images/seguro.jpeg" alt="" />
+                <img className=" w-full h-96 md:h-auto object-cover md:w-48 md:rounded-none md:rounded-l-lg" src="/images/seguro.jpeg" alt="img" />
                 <div className="p-6 flex flex-col justify-start">
                   <h5 className="text-gray-900 text-xl font-medium mb-2">Viaja Seguro</h5>
                   <p className="text-gray-700 text-base mb-4">
