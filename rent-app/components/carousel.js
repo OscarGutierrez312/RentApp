@@ -32,7 +32,7 @@ export default class NextJsCarousel extends Component {
                 {data.map(function(i, idx){
                     return (                        
                     <div key={idx} className="flex-place-items-center z-0">
-                        <Image src={i.name} alt={idx} width={'100%'} height={'36'} layout={'responsive'} Position={isAbsolute}/>
+                        <Image src={i.name} alt={idx} width={'100%'} height={'36'} layout={'responsive'}/>
                         <div className="carousel-caption hidden md:block absolute text-center pb-20 ">
                             <h5 className="text-xl">First slide label</h5>
                             <p>Some representative placeholder content for the first slide.</p>

@@ -45,9 +45,7 @@ export default function Home(providers) {
           </div>
           
           
-        </div>
-
-       
+        </div>       
       </div>
     </LayoutHome>
   )
