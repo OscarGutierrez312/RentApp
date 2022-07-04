@@ -9,15 +9,15 @@ import { isAbsolute, relative } from 'path';
 export default class NextJsCarousel extends Component {
 	render() {
         const data =[
-            {"name":"/images/car_1.jpg", "id":"Vehicle 1"},
-            {"name":"/images/car_2.jpg", "id":"Vehicle 2"},
-            {"name":"/images/car_3.jpg", "id":"Vehicle 3"},
-            {"name":"/images/moto_1.jpg", "id":"MotorBike 1"},
-            {"name":"/images/moto_2.jpg", "id":"MotorBike 2"},
-            {"name":"/images/moto_3.jpg", "id":"MotorBike 3"},
-            {"name":"/images/bici_1.jpg", "id":"Bicycle 1"},
-            {"name":"/images/bici_2.jpg", "id":"Bicycle 2"},
-            {"name":"/images/bici_3.jpg", "id":"Bicycle 3"},
+            {"name":"/Vehicles/car_1_F11CfzUlMm.jpg", "id":"Vehicle 1"},
+            {"name":"/Vehicles/car_2_uEgajM_kQ.jpg", "id":"Vehicle 2"},
+            {"name":"/Vehicles/car_3_1QA7rXvG7.jpg", "id":"Vehicle 3"},
+            {"name":"/Motorbikes/moto_1_Qlu5utdz0.jpg", "id":"MotorBike 1"},
+            {"name":"/Motorbikes/moto_2_DzYK3IZSZY.jpg", "id":"MotorBike 2"},
+            {"name":"/Motorbikes/moto_3_4-GfsBVjb.jpg", "id":"MotorBike 3"},
+            {"name":"/Bycicles/bici_1_sJSJkZhgM.jpg", "id":"Bicycle 1"},
+            {"name":"/Bycicles/bici_2_17LTbyFpA.jpg", "id":"Bicycle 2"},
+            {"name":"/Bycicles/bici_3__Ch4Fyn4t.jpg", "id":"Bicycle 3"},
         ];
 		return (
             
