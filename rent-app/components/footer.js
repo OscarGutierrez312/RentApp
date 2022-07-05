@@ -15,7 +15,7 @@ export default function Header(){
           
           <span>© 2022 Copyright:</span>
           <span>
-            <Image src='/images/Escudo_UD.png' alt="Escudo Distrital" width={50} height={50} />
+            <Image src='/Escudo_UD_amgExkGGh.png' alt="Escudo Distrital" width={50} height={50} />
           </span>
         </a>
            

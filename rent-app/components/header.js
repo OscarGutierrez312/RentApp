@@ -54,7 +54,7 @@ export default function Header(){
                         
                     </li>
                     <li className="nav-item">
-                        <Link href="/Catalogue/vehicles" >
+                        <Link href="/Catalogue/Vehicles" >
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
@@ -63,7 +63,7 @@ export default function Header(){
                         </Link>                            
                     </li>
                     <li className="nav-item">
-                        <Link href="/Catalogue/motorbikes" >
+                        <Link href="/Catalogue/Motorbikes" >
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
@@ -73,7 +73,7 @@ export default function Header(){
                         
                     </li>
                     <li className="nav-item">
-                        <Link href="/Catalogue/bycicles" >
+                        <Link href="/Catalogue/Bycicles" >
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
