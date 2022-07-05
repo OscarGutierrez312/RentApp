@@ -10,7 +10,7 @@ export default function Regist({images}){
                 Prueba de pagina de carga de imagenes
             </h1>
         </div>
-        <Upload/>
+
         {images.map(({ fileId, name, filePath }) => (
             <div key={fileId}>
                 <h1>{filePath}</h1>
