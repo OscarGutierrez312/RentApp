@@ -35,13 +35,13 @@ export default function Product({product}){
 
 export async function getServerSideProps({resolvedUrl}){
     const all = {
-        vehicles:[{"title":"Vehiculo 1", "desc":"Descripción Vehiculo 1", "img":"/images/car_1.jpg", "time":"last updated"},
+        Vehicles:[{"title":"Vehiculo 1", "desc":"Descripción Vehiculo 1", "img":"/images/car_1.jpg", "time":"last updated"},
               {"title":"Vehiculo 2", "desc":"Descripción Vehiculo 2", "img":"/images/car_2.jpg", "time":"last updated"},
               {"title":"Vehiculo 3", "desc":"Descripción Vehiculo 3", "img":"/images/car_3.jpg", "time":"last updated"}],
-        motorbikes:[{"title":"Motocicleta 1", "desc":"Descripción Motocicleta 1", "img":"/images/moto_1.jpg", "time":"last updated"},
+        Motorbikes:[{"title":"Motocicleta 1", "desc":"Descripción Motocicleta 1", "img":"/images/moto_1.jpg", "time":"last updated"},
               {"title":"Motocicleta 2", "desc":"Descripción Motocicleta 2", "img":"/images/moto_2.jpg", "time":"last updated"},
               {"title":"Motocicleta 3", "desc":"Descripción Motocicleta 3", "img":"/images/moto_3.jpg", "time":"last updated"}],
-        bycicles:[{"title":"Bicicleta 1", "desc":"Descripción Bicicleta 1", "img":"/images/bici_1.jpg", "time":"last updated"},
+        Bycicles:[{"title":"Bicicleta 1", "desc":"Descripción Bicicleta 1", "img":"/images/bici_1.jpg", "time":"last updated"},
               {"title":"Bicicleta 2", "desc":"Descripción Bicicleta 2", "img":"/images/bici_2.jpg", "time":"last updated"},
               {"title":"Bicicleta 3", "desc":"Descripción Bicicleta 3", "img":"/images/bici_3.jpg", "time":"last updated"}]
     };

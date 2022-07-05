@@ -1,4 +1,4 @@
-import Upload from "../api/auth/imageKit/imageKit_Cl"
+
 import ImageKit from "imagekit";
 import Image from "next/image";
 
