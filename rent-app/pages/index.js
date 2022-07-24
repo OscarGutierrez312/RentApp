@@ -13,7 +13,7 @@ export default function Home(providers) {
         </Head>     
         <div className="grid grid-cols-2 p-52">
           
-          <Link href="info/manual">
+          <Link href="/info/manual">
               <div className="col-span-2">
                 <h2 className="text-7xl italic text-[#e8b984]">Manual de Solicitud</h2>
                 
