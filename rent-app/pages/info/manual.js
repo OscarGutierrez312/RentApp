@@ -93,7 +93,7 @@ export default function Manual(providers) {
 
                 <div className="flex flex-wrap">
                   <div className="grow-0 shrink-0 basis-auto w-2/12">
-                    <img src="https://cdn-icons.flaticon.com/png/512/1710/premium/1710414.png?token=exp=1658868526~hmac=fe10e1d3ff629293356b4b1fa6db15de" 
+                    <img src="https://cdn-icons-png.flaticon.com/512/86/86165.png" 
                         className="w-full shadow-lg rounded-lg mb-6"
                         alt="" />
                   </div>
