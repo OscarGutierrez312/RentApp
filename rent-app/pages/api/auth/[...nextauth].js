@@ -21,11 +21,11 @@ export default NextAuth({
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                username: { label: "Username", type: "text", placeholder: "Ingresa tu Usuario" },
+                mail: { label: "Username", type: "text", placeholder: "Ingresa tu Correo" },
                 password: {  label: "Password", type: "password" }
             },
             async authorize(credentials, req) {
-                console.log(credentials);
+                //console.log(credentials);
 
                 const supabaseAdmin = await createClient(
                     process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -33,19 +33,19 @@ export default NextAuth({
                 );
             
                 const data = await supabaseAdmin
-                .from('User')
+                .from('Usuario')
                 .select('*')
-                .eq('name', credentials.username);
+                .eq('correo_Usuario', credentials.mail);
                 
-                console.log(data.data.length)
+                //console.log(data)
 
                 if(data.error || data.data.length == 0){
 
                     return data.error
                 }else{
-                    if (data.data[0].name === credentials.username && 
-                        data.data[0].password === credentials.password){                            
-                            const user = data.data[0]
+                    if (data.data[0].correo_Usuario === credentials.mail && 
+                        data.data[0].cont_Usuario === credentials.password){                            
+                            const user = {name: data.data[0].nombre_Usuario, email: data.data[0].correo_Usuario, image: ""}
                             return user
                         }
                     else{
@@ -76,6 +76,7 @@ export default NextAuth({
     callbacks: {
      
         async session({session, token}){
+            //console.log(session)
             session.user.tag = session.user.name
                 .split(" ")
                 .join("")

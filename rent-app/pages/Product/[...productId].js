@@ -2,7 +2,7 @@ import Link from "next/link";
 import LayoutCatalogue from "../../components/layout_catalogue";
 
 export default function Product({product}){
-    console.log(product)
+    //console.log(product)
     return (
         <LayoutCatalogue>
         <div className="flex flex-col justify-center my-20 bg-blend-color">          

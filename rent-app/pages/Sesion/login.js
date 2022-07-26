@@ -4,20 +4,24 @@ import {getProviders, getSession, signIn, signOut, useSession} from "next-auth/r
 import Layout from "../../components/layout"
 import styles from "../../styles/login.module.css"
 import { useRef } from "react"
+import Router from "next/router"
 export default function Login({providers, session, lastUrl}){
 
+    
     const session1 = useSession()
-    console.log(lastUrl)
+    //console.log(lastUrl)
+    //console.log(lastUrl.includes("signup"))
     const msgIn = useRef(null)
     const fields = async (event) => {
         event.preventDefault();
         signIn(providers["credentials"].id, {
             redirect: true,
-            username: event.target[0].value,
+            mail: event.target[0].value,
             password: event.target[1].value,
-            callbackUrl:lastUrl || "/"})
-        .then((error) => msgIn.current.innerText="Usuario Incorrecto")
-        .catch((error)=> null);
+            callbackUrl:lastUrl.includes("signup") ? "/" : lastUrl})
+        .then((error) => msgIn.current.innerText="Correo o Contraseña Incorrecto")
+        .catch((error)=> Router.push('/Sesion/Login'));
+        
     }  
 
      
@@ -37,14 +41,14 @@ export default function Login({providers, session, lastUrl}){
                                                     <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">EasyCar</h4>
                                                 </div>
                                                 <form onSubmit={fields}>
-                                                    <p ref={msgIn} className="mb-4">Ingresa el Usuario</p>
+                                                    <p ref={msgIn} className="mb-4">Ingresa Correo Electrónico y Contraseña</p>
                                                     <div className="mb-4">
                                                         <input
-                                                        type="text"
+                                                        type="email"
                                                         name="user"
                                                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                                         id="exampleFormControlInput1"
-                                                        placeholder="Username"
+                                                        placeholder="Correo Electrónico"
                                                         autoComplete="off"
                                                         />
                                                     </div>
@@ -53,7 +57,7 @@ export default function Login({providers, session, lastUrl}){
                                                         type="password"
                                                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                                         id="exampleFormControlInput1"
-                                                        placeholder="Password"
+                                                        placeholder="Contraseña"
                                                         />
                                                     </div>
                                                     <div className="text-center pt-1 mb-12 pb-1">
@@ -74,14 +78,16 @@ export default function Login({providers, session, lastUrl}){
                                                 </div>                                                    
                                                 <div className="flex items-center justify-between pb-6">
                                                     <p className="mb-0 mr-2">¿No Tienes Una Cuenta?</p>
-                                                    <button
-                                                    type="button"
-                                                    className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                                                    data-mdb-ripple="true"
-                                                    data-mdb-ripple-color="light"
-                                                    >
-                                                    Registrate
-                                                    </button>
+                                                    <Link href="/Sesion/signup">
+                                                        <button
+                                                        type="button"
+                                                        className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                                                        data-mdb-ripple="true"
+                                                        data-mdb-ripple-color="light"
+                                                        >
+                                                        Registrate
+                                                        </button>
+                                                    </Link>
                                                 </div>
                                                 <div
                                                     className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
@@ -94,7 +100,7 @@ export default function Login({providers, session, lastUrl}){
                                                         role="button"
                                                         data-mdb-ripple="true"
                                                         data-mdb-ripple-color="light"
-                                                        onClick={() => signIn(providers["google"].id, {callbackUrl: "/"})}
+                                                        onClick={() => signIn(providers["google"].id, {callbackUrl: lastUrl || "/"})}
                                                     >
                                                         <style jsx>{'.button_google:background-color: #3b5998'}</style>
                                                         <Image src="/google-g_p3SeK3SpW.svg" height={15} width={20}></Image>
