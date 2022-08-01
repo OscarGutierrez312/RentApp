@@ -13,10 +13,10 @@
     "@supabase/supabase-js": "^1.35.4",
     "imagekit": "^4.0.0",
     "mysql": "^2.18.1",
-    "next": "12.1.6",
+    "next": "^12.1.6",
     "next-auth": "^4.8.0",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-responsive-carousel": "^3.2.23",
     "tw-elements": "^1.0.0-alpha12"
   },
