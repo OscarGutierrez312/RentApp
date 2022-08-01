@@ -1,5 +1,6 @@
 import Head from "next/head"
 import Link from "next/link"
+import Image from "next/image"
 import LayoutHome from "../components/layout_home"
 
 export default function Home(providers) {

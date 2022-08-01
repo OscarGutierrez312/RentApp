@@ -10,7 +10,7 @@ export default function Header(){
     const infoV = {id:"0"};
     const infoMc = {id:"1"}
     const infoBc = {id:"2"};   
-
+    //console.log(session)
     return(
         <header className="z-0 ">
             <nav
@@ -54,7 +54,7 @@ export default function Header(){
                         
                     </li>
                     <li className="nav-item">
-                        <Link href="/Catalogue/Vehicles" >
+                        <Link href="/Catalogue/Vehicle" >
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
@@ -63,7 +63,7 @@ export default function Header(){
                         </Link>                            
                     </li>
                     <li className="nav-item">
-                        <Link href="/Catalogue/Motorbikes" >
+                        <Link href="/Catalogue/Motorbike" >
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
@@ -73,7 +73,7 @@ export default function Header(){
                         
                     </li>
                     <li className="nav-item">
-                        <Link href="/Catalogue/Bycicles" >
+                        <Link href="/Catalogue/Bycicle" >
                             <a
                             className="nav-link block p-2 text-gray-600 hover:text-blue-500 focus:text-sky-400/50 transition duration-150 ease-in-out"
                             data-mdb-ripple="true"
@@ -96,13 +96,16 @@ export default function Header(){
                  <div className="grid grid-flow-col auto-cols-max gap-x-3 items-center">
                     <div className="m-3 inline-flex relative w-fit">
                         <div className="absolute inline-block top-0 right-0 bottom-auto left-auto translate-x-2/4 -translate-y-1/2 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 p-1.5 text-xs bg-red-600 rounded-full z-10"></div>
-                        <div className="px-4 py-3 bg-blue-500 flex items-center justify-center text-center rounded-lg shadow-lg">
-                            <div>
-                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" className="mx-auto text-white w-7" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
-                                </svg>
+                        <Link href={"User/notifications"}>
+                            <div className="px-4 py-3 bg-blue-500 flex items-center justify-center text-center rounded-lg shadow-lg cursor-pointer">
+                                <div>
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" className="mx-auto text-white w-7" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
+                                    </svg>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
+                        
                     </div>
                     <div >{session.user.name}</div>
                     <div >
@@ -115,12 +118,15 @@ export default function Header(){
                             LogOut
                         </button>
                     </div>
-                    <div >
-                        <img
-                            src={session.user.image}
-                            className="rounded-lg w-12 hover:scale-125 transition duration-300 ease-in-out"
-                            alt="Avatar"                           
-                        />
+                    <div className="cursor-pointer">
+                        <Link href={"/User/userPage"}>
+                            <img
+                                src={session.user.image}
+                                className="rounded-lg w-12 hover:scale-125 transition duration-300 ease-in-out"
+                                alt="Avatar"                           
+                            />
+                        </Link>
+                        
                     </div>                
                 </div>
                 }

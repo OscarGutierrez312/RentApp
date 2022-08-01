@@ -103,7 +103,7 @@ export default function Login({providers, session, lastUrl}){
                                                         onClick={() => signIn(providers["google"].id, {callbackUrl: lastUrl || "/"})}
                                                     >
                                                         <style jsx>{'.button_google:background-color: #3b5998'}</style>
-                                                        <Image src="/google-g_p3SeK3SpW.svg" height={15} width={20}></Image>
+                                                        <Image src="Util/google-g.svg" height={15} width={20}></Image>
                                                         Continue with {providers["google"].name}
                                                     </a>
                                                 </div>

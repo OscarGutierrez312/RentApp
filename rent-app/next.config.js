@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
 		loader: "imgix",
-		path: "https://ik.imagekit.io/servEasyCar",
 		domains:['lh3.googleusercontent.com'],
+		path: "https://ik.imagekit.io/servEasyCar"		
 	},
 	
 }
