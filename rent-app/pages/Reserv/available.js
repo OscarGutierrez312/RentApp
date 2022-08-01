@@ -1,7 +1,7 @@
 import LayoutCatalogue from "../../components/layout_catalogue";
 
 
-export default function Reserv(){
+export default function Availables(){
     return(
         <LayoutCatalogue>
             <div className="flex mt-16 pt-10">

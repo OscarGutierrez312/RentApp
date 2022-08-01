@@ -6,15 +6,15 @@ export default function Product({product}){
     console.log(product)
     return (
         <LayoutCatalogue>
-        <div className="flex flex-col justify-center my-20 bg-blend-color">          
+        <div className="flex flex-col justify-center mt-20 bg-blend-color">          
           <div className="flex justify-center m-5">
-            <div className="grid grid-flow-row-dense grid-cols-3 min-w-[1700px] min-h-[850px] p-10 max-h-[550px] md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg ring-2">
-              <div className="col-span-2">
-                <img className="h-200 w-200 rounded-t-lg rounded-lg md:rounded-none md:rounded-l-lg" src={"https://ik.imagekit.io/servEasyCar"+product.imagen_Vehiculo} alt="img" />
+            <div className="grid grid-flow-row-dense grid-cols-3 min-w-[1600px] min-h-[750px] p-10 max-h-[550px] md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg ring-2">
+              <div className=" flex col-span-2 items-center">
+                <img className="h-200 w-200 rounded-lg object-fill" src={"https://ik.imagekit.io/servEasyCar"+product.imagen_Vehiculo} alt="img" />
               </div>
               <div>
                 <div className="p-6  justify-start">
-                  <h5 className="text-gray-900 text-xl font-medium mb-2">{product.marca.desc_Marca}</h5>
+                  <h5 className="text-gray-900 text-xl font-medium mb-2">{product.marca.desc_Marca+" "+product.modelo.desc_Modelo}</h5>
                   <p className="text-gray-700 mb-4 text-sm">
                   {product.categoria.desc_Categoria}
                   </p>
