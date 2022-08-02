@@ -5,12 +5,20 @@ import LayoutCatalogue from "../../components/layout_catalogue";
 
 export default function Reserv({product}){
 
-    console.log(product)
+    //console.log(product)
 
     const fields = async (event) => {
         event.preventDefault();
         const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-        const data = await supabaseAdmin
+
+        console.log(event.target[0].value)
+        console.log(event.target[1].value)
+        console.log(event.target[2].value)
+        console.log(event.target[3].value)
+
+        console.log(new Date().getMonth())
+
+        /* const data = await supabaseAdmin
                 .from('Usuario')
                 .select('id_Usuario')
                 .order('id_Usuario', {ascending:false});
@@ -34,7 +42,7 @@ export default function Reserv({product}){
         }
         else{
             Router.push('/Sesion/login');
-        }
+        } */
     }  
 
     return(
@@ -53,22 +61,12 @@ export default function Reserv({product}){
                                                         <div className="grid grid-cols-2 gap-4">
                                                         <div className="flex justify-center">
                                                             <div className="mb-3 xl:w-96">
-                                                                <select className="form-select appearance-none
-                                                                block
-                                                                w-full
-                                                                px-3
-                                                                py-1.5
-                                                                text-base
-                                                                font-normal
-                                                                text-gray-700
-                                                                bg-white bg-clip-padding bg-no-repeat
-                                                                border border-solid border-gray-300
-                                                                rounded
-                                                                transition
-                                                                ease-in-out
-                                                                m-0
-                                                                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                                                                    <option selected>Fecha</option>
+                                                                <select className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal
+                                                                text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
+                                                                transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                                                                aria-label="Default select example"
+                                                                defaultValue={""}>
+                                                                    <option selected>Fecha Inicio</option>
                                                                     <option value="1">One</option>
                                                                     <option value="2">Two</option>
                                                                     <option value="3">Three</option>
@@ -77,22 +75,12 @@ export default function Reserv({product}){
                                                         </div>
                                                         <div className="flex justify-center">
                                                             <div className="mb-3 xl:w-96">
-                                                                <select className="form-select appearance-none
-                                                                block
-                                                                w-full
-                                                                px-3
-                                                                py-1.5
-                                                                text-base
-                                                                font-normal
-                                                                text-gray-700
-                                                                bg-white bg-clip-padding bg-no-repeat
-                                                                border border-solid border-gray-300
-                                                                rounded
-                                                                transition
-                                                                ease-in-out
-                                                                m-0
-                                                                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                                                                    <option selected>Hora</option>
+                                                                <select className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal
+                                                                text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
+                                                                transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                                                                aria-label="Default select example"
+                                                                defaultValue={""}>
+                                                                    <option selected>Hora Inicio</option>
                                                                     <option value="1">One</option>
                                                                     <option value="2">Two</option>
                                                                     <option value="3">Three</option>
@@ -101,49 +89,45 @@ export default function Reserv({product}){
                                                         </div>
                                                         </div>                                                    
                                                         
-
+                                                        <div className="grid grid-cols-2 gap-4">
                                                         <div className="flex justify-center">
                                                             <div className="mb-3 xl:w-96">
-                                                                <select className="form-select appearance-none
-                                                                block
-                                                                w-full
-                                                                px-3
-                                                                py-1.5
-                                                                text-base
-                                                                font-normal
-                                                                text-gray-700
-                                                                bg-white bg-clip-padding bg-no-repeat
-                                                                border border-solid border-gray-300
-                                                                rounded
-                                                                transition
-                                                                ease-in-out
-                                                                m-0
-                                                                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                                                                    <option selected>Tiempo</option>
+                                                                <select className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal
+                                                                text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
+                                                                transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                                                                aria-label="Default select example"
+                                                                defaultValue={""}>
+                                                                    <option selected>Fecha Fin</option>
                                                                     <option value="1">One</option>
                                                                     <option value="2">Two</option>
                                                                     <option value="3">Three</option>
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                        <div className="flex justify-center">
+                                                            <div className="mb-3 xl:w-96">
+                                                                <select className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal
+                                                                text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
+                                                                transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                                                                aria-label="Default select example"
+                                                                defaultValue={""}>
+                                                                    <option selected>Hora Fin</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        </div>  
+                                                        
 
                                                         <div className="flex justify-center">
                                                             <div className="mb-3 xl:w-96">
-                                                                <select className="form-select appearance-none
-                                                                block
-                                                                w-full
-                                                                px-3
-                                                                py-1.5
-                                                                text-base
-                                                                font-normal
-                                                                text-gray-700
-                                                                bg-white bg-clip-padding bg-no-repeat
-                                                                border border-solid border-gray-300
-                                                                rounded
-                                                                transition
-                                                                ease-in-out
-                                                                m-0
-                                                                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                                                                <select className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal
+                                                                    text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
+                                                                    transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                                                                    aria-label="Default select example"
+                                                                    defaultValue={""}>
                                                                     <option selected>Metodo de Pago</option>
                                                                     <option value="1">One</option>
                                                                     <option value="2">Two</option>
@@ -155,8 +139,7 @@ export default function Reserv({product}){
                                                         <button type="submit" className="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
                                                             hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg
                                                             transition duration-150 ease-in-out">Reservar</button>
-                                                        <button className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg  focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mr-1.5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
-
+                                                        
                                                                
                                                     </form>
                                                 </div>

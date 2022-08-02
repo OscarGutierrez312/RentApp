@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {createClient} from "@supabase/supabase-js"
 import LayoutCatalogue from "../../components/layout_catalogue";
 
@@ -10,7 +11,7 @@ export default function Product({product}){
           <div className="flex justify-center m-5">
             <div className="grid grid-flow-row-dense grid-cols-3 min-w-[1600px] min-h-[750px] p-10 max-h-[550px] md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg ring-2">
               <div className=" flex col-span-2 items-center">
-                <img className="h-200 w-200 rounded-lg object-fill" src={"https://ik.imagekit.io/servEasyCar"+product.imagen_Vehiculo} alt="img" />
+                <Image className="rounded-lg object-fill" src={product.imagen_Vehiculo} width={"900px"} height={"500px"} alt="img" />
               </div>
               <div>
                 <div className="p-6  justify-start">
