@@ -35,12 +35,12 @@ export default class NextJsCarousel extends Component {
                             <div key={idx} className="flex-place-items-center z-0">
                                 <Image src={i.name} alt={idx} width={'100%'} height={'36'} layout={'responsive'}/>
                                 <div className="carousel-caption hidden md:block absolute text-center pb-20 ">
-                                    <h5 className="text-xl">First slide label</h5>
-                                    <p>Some representative placeholder content for the first slide.</p>
+                                    <h5 className="text-xl">Solicita un Vehículo</h5>
+                                    <p>Estos son los autos mas populares</p>
                                 </div>
-                                <Link href="/Sesion/logout">
+                                <Link href="/Catalogue/Vehicle">
                                     <button >
-                                        <p className="legend">{i.id}</p>
+                                        <p className="legend">Ir al Catálogo</p>
                                     </button>
                                 </Link>                      
                             </div>

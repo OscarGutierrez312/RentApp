@@ -100,7 +100,7 @@ export default function Header(){
                  : 
                  <div className="grid grid-flow-col auto-cols-max gap-x-3 items-center">
                     <div className="m-3 inline-flex relative w-fit">
-                        <div className="absolute inline-block top-0 right-0 bottom-auto left-auto translate-x-2/4 -translate-y-1/2 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 p-1.5 text-xs bg-red-600 rounded-full z-10"></div>
+                        {/* <div className="absolute inline-block top-0 right-0 bottom-auto left-auto translate-x-2/4 -translate-y-1/2 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 p-1.5 text-xs bg-red-600 rounded-full z-10"></div> */}
                         <Link href={"/User/notifications"}>
                             <div className="px-4 py-3 bg-blue-500 flex items-center justify-center text-center rounded-lg shadow-lg cursor-pointer">
                                 <div>

@@ -19,20 +19,26 @@ export default function Product({product}){
                   <p className="text-gray-700 mb-4 text-sm">
                   {product.categoria.desc_Categoria}
                   </p>
+                  {product.reserva.length == 0 ? 
                   <Link href={"/Reserv/"+product.id_Vehiculo}>
-                    <button type="button" className="inline-block px-6 py-2.5 m-10 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">
-                      Reservar
-                    </button>
-                  </Link>
+                  <button type="button" className="inline-block px-6 py-2.5 m-10 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">
+                    Reservar
+                  </button>
+                  </Link>:
+                  <button type="button" className="inline-block px-6 py-2.5 m-10 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out"
+                  disabled>
+                  Reservado
+                  </button>}
                   
-                  <button type="button" className="inline-block px-6 py-2.5 m-10 bg-cyan-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">
+                  
+                  {/* <button type="button" className="inline-block px-6 py-2.5 m-10 bg-cyan-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">
                     Solicitar</button>
 
                   <Link href={"/Reserv/available"}>
                     <button type="button" className="inline-block px-6 py-2.5 m-10 bg-green-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">
                       Consultar Disponiblidad
                     </button>
-                  </Link>
+                  </Link> */}
                   
                 </div>
               </div>             
@@ -61,7 +67,8 @@ export async function getServerSideProps({resolvedUrl}){
       marca: Marca(desc_Marca), 
       usuario: Usuario(nombre_Usuario, correo_Usuario),
       categoria: Categoria(desc_Categoria),
-      tipo:Tipo_Vehiculo(desc_Tipo)
+      tipo:Tipo_Vehiculo(desc_Tipo),
+      reserva: Reserva("estado_Reserva").eq("id_Vehiculo", id_Vehiculo)
     `)
     .eq('id_Vehiculo', info[2]);
 

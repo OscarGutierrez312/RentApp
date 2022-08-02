@@ -84,7 +84,7 @@ export default NextAuth({
             const el = []
             p.data.forEach(element => el.push(element.correo_Usuario))
             const inDatabase = el.find(element => element == session.user.email)
-            console.log(inDatabase)
+            //console.log(inDatabase)
 
             if (!inDatabase){
                 const data = await supabaseAdmin

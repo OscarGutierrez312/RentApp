@@ -7,8 +7,13 @@ import LayoutCatalogue from "../../components/layout_catalogue";
 export default function Catalogue({data, catalogueId, reservas}){
     //console.log(data.data[2].reserva.length)
 
+    const fields = async (event) => {
+      console.log(event)
+    }
     return (
       <LayoutCatalogue>
+        
+
         <div className="flex flex-col justify-center my-20 bg-blend-color">          
           {data.data.map(function(i, idx){
             return (      

@@ -1,4 +1,4 @@
-import { getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import {createClient} from "@supabase/supabase-js"
 import LayoutCatalogue from "../../components/layout_catalogue";
 import { useRef } from "react";
@@ -9,6 +9,8 @@ import Router from "next/router";
 export default function Reserv({product, lastUrl}){
 
     //console.log(product)
+
+    const {data:session} = useSession()
 
     const days = []
 
@@ -117,14 +119,18 @@ export default function Reserv({product, lastUrl}){
                 .select('id_Reserva')
                 .order('id_Reserva', {ascending:false});
         
-        
+        const user = await supabaseAdmin
+        .from("Usuario")
+        .select("id_Usuario")
+        .eq("correo_Usuario",session.user.email)
+
         const update = {
             id_Reserva: (data.data[0].id_Reserva)+1,
             created_at: new Date(),
             estado_Reserva: "Activa",
             valor_Reserva: valor,
             id_Vehiculo: product.id_Vehiculo,
-            id_Usuario: 10001,
+            id_Usuario: user.data[0].id_Usuario,
             fecha_fin_Reserva: finConv,
             fecha_inicio_Reserva: inicioConv
         }       
