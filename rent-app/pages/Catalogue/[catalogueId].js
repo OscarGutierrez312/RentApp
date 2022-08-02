@@ -29,8 +29,8 @@ export default function Catalogue({data, catalogueId, reservas}){
                       <p className="text-gray-600 text-xs">Precio: ${i.precio_Vehiculo}/Hora </p>
                     </div>
                     <div className="p-6 flex flex-col absolute inset-y-0 right-0">
-                      {data.data[idx].reserva.length == 0 ? <h5 className="text-gray-900 text-xl font-medium mb-2 text-green-700">Disponible </h5>:
-                      <h5 className="text-gray-900 text-xl font-medium mb-2 text-red-300">Reservado </h5>}
+                      {data.data[idx].reserva.length == 0 ? <h5 className="text-xl font-medium mb-2 text-green-700">Disponible </h5>:
+                      <h5 className="text-xl font-medium mb-2 text-red-300">Reservado </h5>}
                       
                     </div>
                   </div>

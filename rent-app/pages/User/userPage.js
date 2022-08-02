@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 import LayoutCatalogue from "../../components/layout_catalogue";
 
@@ -51,4 +51,16 @@ export default function userPage(){
         </LayoutCatalogue>
             
     )
+}
+
+export async function getServerSideProps(context){
+    const session = await getSession(context)
+    if(!session){
+        return {
+            redirect:{
+                destination: '/Sesion/login',
+                permanent: false
+            }
+        }
+    }
 }

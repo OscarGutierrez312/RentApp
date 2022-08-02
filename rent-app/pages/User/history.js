@@ -5,6 +5,7 @@ import {createClient} from "@supabase/supabase-js"
 
 export default function History({historial}){
     console.log(historial[0].vehiculo)
+
     return(
         <LayoutCatalogue>
             <h3 className="text-2xl text-gray-700 font-bold mb-6 -ml-3">Latest News</h3>
@@ -44,38 +45,47 @@ export default function History({historial}){
 }
 
 export async function getServerSideProps(context){
-    const supabaseAdmin = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.SUPABASE_SERVICE_ROLE_KEY
-      );
-
     const session = await getSession(context)
+    if(!session){
+        return {
+            redirect:{
+                destination: '/Sesion/login',
+                permanent: false
+            }
+        }
+    }else{
+        const supabaseAdmin = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL,
+            process.env.SUPABASE_SERVICE_ROLE_KEY
+        );
 
-    const user = await supabaseAdmin
-    .from("Usuario")
-    .select("id_Usuario")
-    .eq("correo_Usuario",session.user.email)
+        
 
-    const hist = await supabaseAdmin
-    .from("Reserva")
-    .select(`
-    *,
-    vehiculo: Vehiculo(
-        modelo: Modelo(desc_Modelo),
-        marca: Marca(desc_Marca), 
-        categoria: Categoria(desc_Categoria)
-    )
-  `)
-    .eq("id_Usuario", user.data[0].id_Usuario)
+        const user = await supabaseAdmin
+        .from("Usuario")
+        .select("id_Usuario")
+        .eq("correo_Usuario",session.user.email)
 
-    //console.log(hist)
+        const hist = await supabaseAdmin
+        .from("Reserva")
+        .select(`
+        *,
+        vehiculo: Vehiculo(
+            modelo: Modelo(desc_Modelo),
+            marca: Marca(desc_Marca), 
+            categoria: Categoria(desc_Categoria)
+        )
+    `)
+        .eq("id_Usuario", user.data[0].id_Usuario)
 
-    const historial = hist.data
+        //console.log(hist)
 
-    return{
-        props:{
-            historial
+        const historial = hist.data
+
+        return{
+            props:{
+                historial
+            }
         }
     }
-
 }

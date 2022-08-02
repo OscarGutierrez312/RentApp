@@ -21,7 +21,7 @@ export default class NextJsCarousel extends Component {
         ];
 		return (
             
-			<div className="flex flex-col  relative z-0 m-2 divide-y-4 divide-cyan-200 divide-solid">
+			<div className="flex flex-col  relative z-0 m-2 divide-y-4 divide-black-200 divide-solid">
                 <div className="text-center  p-20 px-6 mb-9">
                     <h1 className="text-8xl font-bold font-sans mt-0 mb-6 text-[#98c8eb] hover:text-[#a7db87] transition duration-150 ease-in-out">Bienvenido a EasyCar</h1>
                     <h3 className="text-2xl font-thin mb-8 italic">

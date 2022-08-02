@@ -30,38 +30,48 @@ export default function MyVehicles({data}){
 }
 
 export async function getServerSideProps(context){
-
     const session = await getSession(context)
-    
-    const supabaseAdmin = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
 
-    const user = await supabaseAdmin
-    .from("Usuario")
-    .select("id_Usuario")
-    .eq("correo_Usuario",session.user.email)
+    if(!session){
+        return {
+            redirect:{
+                destination: '/Sesion/login',
+                permanent: false
+            }
+        }
+    }else{
 
-    //console.log(user.data[0].id_Usuario)
+        
+        
+        const supabaseAdmin = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.SUPABASE_SERVICE_ROLE_KEY
+        );
 
-    const data = await supabaseAdmin
-    .from("Vehiculo")
-    .select(`
-      *,
-      modelo: Modelo(desc_Modelo),
-      marca: Marca(desc_Marca), 
-      usuario: Usuario(nombre_Usuario, correo_Usuario),
-      categoria: Categoria(desc_Categoria),
-      tipo:Tipo_Vehiculo(desc_Tipo)
-    `)
-    .eq('id_Usuario', user.data[0].id_Usuario);
-    
+        const user = await supabaseAdmin
+        .from("Usuario")
+        .select("id_Usuario")
+        .eq("correo_Usuario",session.user.email)
 
-    return{
-        props:{
-            data
+        //console.log(user.data[0].id_Usuario)
+
+        const data = await supabaseAdmin
+        .from("Vehiculo")
+        .select(`
+        *,
+        modelo: Modelo(desc_Modelo),
+        marca: Marca(desc_Marca), 
+        usuario: Usuario(nombre_Usuario, correo_Usuario),
+        categoria: Categoria(desc_Categoria),
+        tipo:Tipo_Vehiculo(desc_Tipo)
+        `)
+        .eq('id_Usuario', user.data[0].id_Usuario);
+        
+
+        return{
+            props:{
+                data
+            }
         }
     }
-    
   }
