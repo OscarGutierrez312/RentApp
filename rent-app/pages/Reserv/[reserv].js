@@ -1,11 +1,72 @@
 import { getSession } from "next-auth/react";
 import {createClient} from "@supabase/supabase-js"
 import LayoutCatalogue from "../../components/layout_catalogue";
+import { useRef } from "react";
 
 
 export default function Reserv({product}){
 
     //console.log(product)
+
+    const days = []
+
+    const initDate = useRef(null)
+    const initHour = useRef(null)
+    const endDate = useRef(null)
+    const endHour = useRef(null)
+
+    const actDay = new Date().getDay()
+
+    const m = new Intl.DateTimeFormat('ES-LA', {month: 'long'}).format(new Date())
+
+    const month = m.charAt(0).toUpperCase()+m.slice(1)
+    
+    for (var i=0;i<5;i++){
+        days.push(<option key={i} value={i+actDay}>{month} {i+actDay}</option>);
+    }
+
+    const changeInitHour = async (event)=> {
+
+        var len = initHour.current.options.length
+        
+        console.log(initHour.current.options)
+
+        const actHour = event.target.value == new Date().getDay() ? new Date().getHours() : 0;
+        console.log(actHour)
+        for (var i=actHour;i<24;i++){
+            initHour.current.options[i-actHour] = new Option(i+':00', i)
+        }
+    }
+
+    const changeEndDate = async (event)=> {
+
+        console.log(initDate.current.value)
+
+        /* var len = initHour.current.options.length
+        
+        console.log(initHour.current.options)
+
+        const actHour = event.target.value == new Date().getDay() ? new Date().getHours() : 0;
+        console.log(actHour)
+        for (var i=actHour;i<24;i++){
+            initHour.current.options[i-actHour] = new Option(i+':00', i)
+        } */
+    }
+
+    const changeEndHour = async (event)=> {
+
+        /* var len = initHour.current.options.length
+        
+        console.log(initHour.current.options)
+
+        const actHour = event.target.value == new Date().getDay() ? new Date().getHours() : 0;
+        console.log(actHour)
+        for (var i=actHour;i<24;i++){
+            initHour.current.options[i-actHour] = new Option(i+':00', i)
+        } */
+    }
+
+
 
     const fields = async (event) => {
         event.preventDefault();
@@ -16,7 +77,7 @@ export default function Reserv({product}){
         console.log(event.target[2].value)
         console.log(event.target[3].value)
 
-        console.log(new Date().getMonth())
+        console.log()
 
         /* const data = await supabaseAdmin
                 .from('Usuario')
@@ -65,11 +126,13 @@ export default function Reserv({product}){
                                                                 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
                                                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                                                                 aria-label="Default select example"
-                                                                defaultValue={""}>
+                                                                defaultValue={""}
+                                                                onChange={changeInitHour}
+                                                                ref={initDate}>
                                                                     <option selected>Fecha Inicio</option>
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>
+                                                                    {days.map(function(i){
+                                                                        return(i)
+                                                                    })}
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -79,11 +142,11 @@ export default function Reserv({product}){
                                                                 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
                                                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                                                                 aria-label="Default select example"
-                                                                defaultValue={""}>
+                                                                defaultValue={""}
+                                                                onChange={changeEndDate}
+                                                                ref={initHour}>
                                                                     <option selected>Hora Inicio</option>
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>
+                                                                    
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -96,11 +159,11 @@ export default function Reserv({product}){
                                                                 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
                                                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                                                                 aria-label="Default select example"
-                                                                defaultValue={""}>
+                                                                defaultValue={""}
+                                                                onChange={changeEndHour}
+                                                                ref={endDate}>
                                                                     <option selected>Fecha Fin</option>
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>
+                                                                    
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -110,11 +173,10 @@ export default function Reserv({product}){
                                                                 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
                                                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                                                                 aria-label="Default select example"
-                                                                defaultValue={""}>
+                                                                defaultValue={""}
+                                                                ref={endHour}>
                                                                     <option selected>Hora Fin</option>
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>
+                                                                    
                                                                 </select>
                                                             </div>
                                                         </div>
