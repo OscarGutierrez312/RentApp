@@ -74,9 +74,46 @@ export default NextAuth({
     
 
     callbacks: {
-     
+
         async session({session, token}){
             //console.log(session)
+            const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+            const p = await supabaseAdmin
+                    .from("Usuario")
+                    .select('correo_Usuario')
+            const el = []
+            p.data.forEach(element => el.push(element.correo_Usuario))
+            const inDatabase = el.find(element => element == session.user.email)
+            console.log(inDatabase)
+
+            if (!inDatabase){
+                const data = await supabaseAdmin
+                .from('Usuario')
+                .select('id_Usuario')
+                .order('id_Usuario', {ascending:false});        
+        
+                const update = {
+                    id_Usuario: data.data[0].id_Usuario+1,
+                    created_at: new Date(),
+                    nombre_Usuario: session.user.name,
+                    correo_Usuario: session.user.email,
+                    cont_Usuario: "",
+                    rol_Usuario: "basico"
+                }       
+                
+                let {error} = await supabaseAdmin.from('Usuario').upsert(update,{
+                    returning:'minimal'
+                })
+            
+                if(error){
+                    throw error;
+                }
+                else{
+                    //console.log("Registrado")
+                }
+            }
+
+            //console.log(["Prueba", "prueba", "desar"].find(element => element == "pjrueba"))
             session.user.tag = session.user.name
                 .split(" ")
                 .join("")

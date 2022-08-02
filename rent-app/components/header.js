@@ -3,6 +3,7 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import styles from "./header.module.css"
+import {createClient} from "@supabase/supabase-js"
 
 export default function Header(){
     
@@ -11,6 +12,10 @@ export default function Header(){
     const infoMc = {id:"1"}
     const infoBc = {id:"2"};   
     //console.log(session)
+
+    const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
+
     return(
         <header className="z-0 ">
             <nav

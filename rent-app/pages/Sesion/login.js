@@ -9,8 +9,7 @@ export default function Login({providers, session, lastUrl}){
 
     
     const session1 = useSession()
-    //console.log(lastUrl)
-    //console.log(lastUrl.includes("signup"))
+
     const msgIn = useRef(null)
     const fields = async (event) => {
         event.preventDefault();

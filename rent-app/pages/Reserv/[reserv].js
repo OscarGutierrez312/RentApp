@@ -2,6 +2,7 @@ import { getSession } from "next-auth/react";
 import {createClient} from "@supabase/supabase-js"
 import LayoutCatalogue from "../../components/layout_catalogue";
 import { useRef } from "react";
+import Image from "next/image";
 import Router from "next/router";
 
 
@@ -16,6 +17,7 @@ export default function Reserv({product, lastUrl}){
     const endDate = useRef(null)
     const endHour = useRef(null)
     const time = useRef(null)
+    const cost = useRef(null)
 
     const actDay = new Date().getDate()
 
@@ -86,7 +88,12 @@ export default function Reserv({product, lastUrl}){
 
         const days = diffDays == 0 ? "": diffDays > 1 ? diffDays+" Días": diffDays+" Día"
         const hours = Hours == 0 ? "": Hours > 1 ? " "+Hours+" Horas": " "+Hours+" Hora"
-        time.current.innerText = "Tiempo de Renta: "+days+hours
+        time.current.innerText = "Tiempo de Renta: "+days+hours+"\n"
+
+        const options2 = { style: 'currency', currency: 'COP' };
+        const numberFormat2 = new Intl.NumberFormat('Es-LA', options2);
+
+        cost.current.innerText = "Costo: "+numberFormat2.format((diffHours*product.precio_Vehiculo))
     }
 
 
@@ -122,7 +129,7 @@ export default function Reserv({product, lastUrl}){
             fecha_inicio_Reserva: inicioConv
         }       
         
-        console.log(update)
+        //        console.log(update)
 
         let {error} = await supabaseAdmin.from('Reserva').upsert(update,{
             returning:'minimal'
@@ -240,16 +247,23 @@ export default function Reserv({product, lastUrl}){
                                             </div>
                                         </div>
                                         <div className="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none back_gradient">
-                                            <style jsx>{' .back_gradient {background: linear-gradient(to right, #3bc4fa, #73aafd, #5f1ef8, #7a09fa);}'}</style>
-                                            <div className="text-white px-4 py-6 md:p-12 md:mx-6">
-                                                <h4 className="text-xl font-semibold mb-6">Registrate y Registra tu Vehículo</h4>
-                                                <p className="text-sm">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat.
-                                                </p>
+                                            <style jsx>{' .back_gradient {background: linear-gradient(to right, #555555, #bdbdbd, #e7e7e7, #ffffff);}'}</style>
+                                            <div className="w-full text-white px-4 py-6 md:p-1 md:mx-6">
+                                                <h4 className="text-xl font-semibold mb-6">Vehículo Solicitado</h4>
+                                                <div className="flex justify-center m-1 h-72 w-full">
+                                                    <div className="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg ">
+                                                        <Image className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg" src={product.imagen_Vehiculo} alt="img" width={150} height={50} />
+                                                        <div className="p-6 flex flex-col justify-start">
+                                                        <h5 className="text-gray-900 text-xl font-medium mb-2">{product.marca.desc_Marca+" "+product.modelo.desc_Modelo} </h5>
+                                                        <p className="text-gray-700 text-base mb-4">
+                                                            {product.categoria.desc_Categoria}
+                                                        </p>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    </div>
                                                 <label ref={time}></label>
+                                                <label ref={cost}></label>
                                             </div>
                                         </div>
                                     </div>
