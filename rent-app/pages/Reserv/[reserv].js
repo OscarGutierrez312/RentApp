@@ -2,9 +2,10 @@ import { getSession } from "next-auth/react";
 import {createClient} from "@supabase/supabase-js"
 import LayoutCatalogue from "../../components/layout_catalogue";
 import { useRef } from "react";
+import Router from "next/router";
 
 
-export default function Reserv({product}){
+export default function Reserv({product, lastUrl}){
 
     //console.log(product)
 
@@ -14,8 +15,9 @@ export default function Reserv({product}){
     const initHour = useRef(null)
     const endDate = useRef(null)
     const endHour = useRef(null)
+    const time = useRef(null)
 
-    const actDay = new Date().getDay()
+    const actDay = new Date().getDate()
 
     const m = new Intl.DateTimeFormat('ES-LA', {month: 'long'}).format(new Date())
 
@@ -29,72 +31,100 @@ export default function Reserv({product}){
 
         var len = initHour.current.options.length
         
-        console.log(initHour.current.options)
+        //console.log(initHour.current.options)
 
-        const actHour = event.target.value == new Date().getDay() ? new Date().getHours() : 0;
-        console.log(actHour)
-        for (var i=actHour;i<24;i++){
+        const actHour = event.target.value == new Date().getDate() ? new Date().getHours() : 0;
+        //console.log(actHour)
+        for (var i=actHour+1;i<24;i++){
             initHour.current.options[i-actHour] = new Option(i+':00', i)
         }
     }
 
     const changeEndDate = async (event)=> {
 
-        console.log(initDate.current.value)
-
-        /* var len = initHour.current.options.length
+        const hourP = parseInt(event.target.value)+1
+        const dayP = parseInt(initDate.current.value)-1
         
-        console.log(initHour.current.options)
-
-        const actHour = event.target.value == new Date().getDay() ? new Date().getHours() : 0;
-        console.log(actHour)
-        for (var i=actHour;i<24;i++){
-            initHour.current.options[i-actHour] = new Option(i+':00', i)
-        } */
+        const nDate = new Date(new Date().getFullYear(), 7, dayP, (hourP));
+        
+        const auxDate = new Date()
+            
+        auxDate.setDate(nDate.getDate()+1)
+        for (var i=1;i<10;i++){                   
+            const aux1Date = auxDate  
+            const mo = new Intl.DateTimeFormat('ES-LA', {month: 'long'}).format(auxDate)
+            const mon = mo.charAt(0).toUpperCase()+m.slice(1)
+            endDate.current.options[i] = new Option(mon+" "+auxDate.getDate(), auxDate.getDate())
+            auxDate.setDate(aux1Date.getDate()+1)
+        }
     }
 
     const changeEndHour = async (event)=> {
-
-        /* var len = initHour.current.options.length
         
-        console.log(initHour.current.options)
 
-        const actHour = event.target.value == new Date().getDay() ? new Date().getHours() : 0;
-        console.log(actHour)
+        const hourP = parseInt(initHour.current.value)+1
+        const dayP = parseInt(initDate.current.value)
+        
+        const nDate = new Date(new Date().getFullYear(), 7, dayP, (hourP));
+
+        const actHour = nDate.getDate() == event.target.value ? nDate.getHours() : 0;
+        
         for (var i=actHour;i<24;i++){
-            initHour.current.options[i-actHour] = new Option(i+':00', i)
-        } */
+            endHour.current.options[(i+1)-actHour] = new Option(i+':00', i)
+        }
     }
 
+    const setTime = async (event)=> {
+        const a = new Date(new Date().getFullYear(),7,initDate.current.value,initHour.current.value)
+        const b = new Date(new Date().getFullYear(),7,endDate.current.value,endHour.current.value)
+
+
+        const diffTime = Math.abs(b - a);
+        const diffHours = Math.ceil(diffTime / (1000 * 60 * 60)); 
+        const diffDays = parseInt(diffHours / 24); 
+        const Hours = diffHours-(diffDays*24)
+
+        const days = diffDays == 0 ? "": diffDays > 1 ? diffDays+" Días": diffDays+" Día"
+        const hours = Hours == 0 ? "": Hours > 1 ? " "+Hours+" Horas": " "+Hours+" Hora"
+        time.current.innerText = "Tiempo de Renta: "+days+hours
+    }
 
 
     const fields = async (event) => {
         event.preventDefault();
         const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
-        console.log(event.target[0].value)
-        console.log(event.target[1].value)
-        console.log(event.target[2].value)
-        console.log(event.target[3].value)
+        const inicio = new Date(new Date().getFullYear(), 7, event.target[0].value, event.target[1].value)
+        const fin = new Date(new Date().getFullYear(), 7, event.target[2].value, event.target[3].value)
 
-        console.log()
+        const diffTime = Math.abs(fin - inicio);
+        const diffHours = Math.ceil(diffTime / (1000 * 60 * 60)); 
 
-        /* const data = await supabaseAdmin
-                .from('Usuario')
-                .select('id_Usuario')
-                .order('id_Usuario', {ascending:false});
+        const valor = product.precio_Vehiculo * diffHours
+
+        const inicioConv = new Date(inicio.getFullYear(), inicio.getMonth(), inicio.getDate(),parseInt(inicio.getHours())-5)
+        const finConv = new Date(fin.getFullYear(), fin.getMonth(), fin.getDate(),parseInt(fin.getHours())-5)
+        
+        const data = await supabaseAdmin
+                .from('Reserva')
+                .select('id_Reserva')
+                .order('id_Reserva', {ascending:false});
         
         
         const update = {
-            id_Usuario: data.data[0].id_Usuario+1,
+            id_Reserva: (data.data[0].id_Reserva)+1,
             created_at: new Date(),
-            nombre_Usuario: event.target[0].value+" "+event.target[1].value,
-            correo_Usuario: event.target[2].value,
-            cont_Usuario: event.target[3].value,
-            rol_Usuario: "basico"
+            estado_Reserva: "Activa",
+            valor_Reserva: valor,
+            id_Vehiculo: product.id_Vehiculo,
+            id_Usuario: 10001,
+            fecha_fin_Reserva: finConv,
+            fecha_inicio_Reserva: inicioConv
         }       
         
-        let {error} = await supabaseAdmin.from('Usuario').upsert(update,{
+        console.log(update)
+
+        let {error} = await supabaseAdmin.from('Reserva').upsert(update,{
             returning:'minimal'
         })
     
@@ -102,8 +132,9 @@ export default function Reserv({product}){
             throw error;
         }
         else{
-            Router.push('/Sesion/login');
-        } */
+            console.log("Reserva Exitosa")
+            Router.push(lastUrl)
+        }
     }  
 
     return(
@@ -126,10 +157,10 @@ export default function Reserv({product}){
                                                                 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
                                                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                                                                 aria-label="Default select example"
-                                                                defaultValue={""}
+                                                                defaultValue={0}
                                                                 onChange={changeInitHour}
                                                                 ref={initDate}>
-                                                                    <option selected>Fecha Inicio</option>
+                                                                    <option>Fecha Inicio</option>
                                                                     {days.map(function(i){
                                                                         return(i)
                                                                     })}
@@ -142,10 +173,10 @@ export default function Reserv({product}){
                                                                 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
                                                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                                                                 aria-label="Default select example"
-                                                                defaultValue={""}
+                                                                defaultValue={0}
                                                                 onChange={changeEndDate}
                                                                 ref={initHour}>
-                                                                    <option selected>Hora Inicio</option>
+                                                                    <option>Hora Inicio</option>
                                                                     
                                                                 </select>
                                                             </div>
@@ -159,10 +190,10 @@ export default function Reserv({product}){
                                                                 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
                                                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                                                                 aria-label="Default select example"
-                                                                defaultValue={""}
+                                                                defaultValue={0}
                                                                 onChange={changeEndHour}
                                                                 ref={endDate}>
-                                                                    <option selected>Fecha Fin</option>
+                                                                    <option>Fecha Fin</option>
                                                                     
                                                                 </select>
                                                             </div>
@@ -173,9 +204,10 @@ export default function Reserv({product}){
                                                                 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded
                                                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                                                                 aria-label="Default select example"
-                                                                defaultValue={""}
-                                                                ref={endHour}>
-                                                                    <option selected>Hora Fin</option>
+                                                                defaultValue={0}
+                                                                ref={endHour}
+                                                                onChange={setTime}>
+                                                                    <option>Hora Fin</option>
                                                                     
                                                                 </select>
                                                             </div>
@@ -191,9 +223,9 @@ export default function Reserv({product}){
                                                                     aria-label="Default select example"
                                                                     defaultValue={""}>
                                                                     <option selected>Metodo de Pago</option>
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>
+                                                                    <option value="1">Tarjeta de Credito</option>
+                                                                    <option value="2">Tarjeta Debito</option>
+                                                                    <option value="3">PSE</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -217,6 +249,7 @@ export default function Reserv({product}){
                                                 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                                 consequat.
                                                 </p>
+                                                <label ref={time}></label>
                                             </div>
                                         </div>
                                     </div>
@@ -233,7 +266,7 @@ export default function Reserv({product}){
 
 export async function getServerSideProps(context){
     const session = await getSession(context)
-    //console.log(context.params.reserv)
+    const lastUrl = context.req.headers.referer || null
     const idVehiculo = context.params.reserv
     if(!session){
         return {
@@ -263,7 +296,8 @@ export async function getServerSideProps(context){
           const product = data.data[0];
         return {
             props:{
-                product
+                product, 
+                lastUrl
             }
         }
     }
