@@ -146,7 +146,7 @@ export default function Reserv({product, lastUrl}){
         }
         else{
             console.log("Reserva Exitosa")
-            Router.push(lastUrl)
+            Router.push("/Pay/"+parseInt(data.data[0].id_Reserva)+1)
         }
     }  
 
@@ -237,8 +237,7 @@ export default function Reserv({product, lastUrl}){
                                                                     defaultValue={""}>
                                                                     <option selected>Metodo de Pago</option>
                                                                     <option value="1">Tarjeta de Credito</option>
-                                                                    <option value="2">Tarjeta Debito</option>
-                                                                    <option value="3">PSE</option>
+                                                                    
                                                                 </select>
                                                             </div>
                                                         </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import LayoutCatalogue from "../../components/layout_catalogue";
 
 
-export default function userPage(){
+export default function userPage({ses}){
     const {data:session} = useSession()
 
     console.log(!session ? "undefined":session.user.image)
@@ -61,6 +61,11 @@ export async function getServerSideProps(context){
                 destination: '/Sesion/login',
                 permanent: false
             }
+        }
+    }
+    return{
+        props:{
+            session
         }
     }
 }
