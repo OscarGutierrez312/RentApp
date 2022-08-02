@@ -15,8 +15,8 @@ export default function RegisterVehicle({data}){
 
         const img = await new ImageKit({
             publicKey: process.env.NEXT_PUBLIC_IMAGE_KIT_PUBLIC_API_KEY,
-            privateKey: "private_CwIWJa6ZWAMY88qCdDk2TZYnuRE=",
-            urlEndpoint: "https://ik.imagekit.io/servEasyCar"
+            privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,
+            urlEndpoint: process.env.IMAGE_KIT_URL_ENDPOINT
         });
 
         const file = event.target[0].files[0]
