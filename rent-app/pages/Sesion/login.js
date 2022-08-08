@@ -1,10 +1,9 @@
 import Link from "next/link"
 import Image from "next/image"
 import {getProviders, getSession, signIn, signOut, useSession} from "next-auth/react"
+import {createClient} from "@supabase/supabase-js"
 import Layout from "../../components/layout"
-import styles from "../../styles/login.module.css"
 import { useRef } from "react"
-import Router from "next/router"
 export default function Login({providers, session, lastUrl}){
 
     
@@ -13,14 +12,33 @@ export default function Login({providers, session, lastUrl}){
     const msgIn = useRef(null)
     const fields = async (event) => {
         event.preventDefault();
-        signIn(providers["credentials"].id, {
-            redirect: true,
-            mail: event.target[0].value,
-            password: event.target[1].value,
-            callbackUrl:lastUrl.includes("signup") ? "/" : lastUrl})
-        .then((error) => msgIn.current.innerText="Correo o Contraseña Incorrecto")
-        .catch((error)=> Router.push('/Sesion/Login'));
-        
+        const supabaseAdmin = await createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        );
+    
+        const data = await supabaseAdmin
+        .from('Usuario')
+        .select('*')
+        .eq('correo_Usuario', event.target[0].value);
+
+        if(data.data[0]){
+            if (data.data[0].correo_Usuario === event.target[0].value && 
+                data.data[0].cont_Usuario === event.target[1].value){
+                    signIn(providers["credentials"].id, {
+                        redirect: true,
+                        mail: event.target[0].value,
+                        password: event.target[1].value,
+                        callbackUrl:lastUrl.includes("signup") ? "/" : lastUrl});
+            }else{
+                if(data.data[0].cont_Usuario != event.target[1].value){
+                    msgIn.current.innerText="Contraseña Incorrecta"
+                }
+            }
+        }else{
+            msgIn.current.innerText="Correo Electrónico No Registrado"
+        }
+
     }  
 
      
@@ -49,7 +67,7 @@ export default function Login({providers, session, lastUrl}){
                                                         id="exampleFormControlInput1"
                                                         placeholder="Correo Electrónico"
                                                         autoComplete="off"
-                                                        />
+                                                        required/>
                                                     </div>
                                                         <div className="mb-4">
                                                         <input
@@ -57,7 +75,7 @@ export default function Login({providers, session, lastUrl}){
                                                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                                         id="exampleFormControlInput1"
                                                         placeholder="Contraseña"
-                                                        />
+                                                        required/>
                                                     </div>
                                                     <div className="text-center pt-1 mb-12 pb-1">
                                                         <button
@@ -104,6 +122,32 @@ export default function Login({providers, session, lastUrl}){
                                                         <style jsx>{'.button_google:background-color: #3b5998'}</style>
                                                         <Image src="Util/google-g.svg" height={15} width={20}></Image>
                                                         Continue with {providers["google"].name}
+                                                    </a>
+                                                </div>
+                                                <div className=" button_google px-7 py-3 text-black font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+                                                    >                              
+                                                    <a key={providers["facebook"].name}                                                            
+                                                        role="button"
+                                                        data-mdb-ripple="true"
+                                                        data-mdb-ripple-color="light"
+                                                        onClick={() => signIn(providers["facebook"].id, {callbackUrl: lastUrl || "/"})}
+                                                    >
+                                                        <style jsx>{'.button_google:background-color: #3b5998'}</style>
+                                                        <Image src="Util/facebook-g.svg" height={15} width={20}></Image>
+                                                        Continue with {providers["facebook"].name}
+                                                    </a>
+                                                </div>
+                                                <div className=" button_google px-7 py-3 text-black font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+                                                    >                              
+                                                    <a key={providers["twitter"].name}                                                            
+                                                        role="button"
+                                                        data-mdb-ripple="true"
+                                                        data-mdb-ripple-color="light"
+                                                        onClick={() => signIn(providers["twitter"].id, {callbackUrl: lastUrl || "/"})}
+                                                    >
+                                                        <style jsx>{'.button_google:background-color: #3b5998'}</style>
+                                                        <Image src="Util/facebook-g.svg" height={15} width={20}></Image>
+                                                        Continue with {providers["twitter"].name}
                                                     </a>
                                                 </div>
                                             </div>

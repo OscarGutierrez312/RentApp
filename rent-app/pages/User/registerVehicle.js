@@ -7,33 +7,30 @@ import ImageKit from 'imagekit'
 import LayoutCatalogue from "../../components/layout_catalogue";
 
 
-export default function RegisterVehicle({data}){
+export default function RegisterVehicle({data, privKey, endPoint}){
     
     const fields = async (event) => {
         event.preventDefault();
         const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-
-        const img = await new ImageKit({
-            publicKey: process.env.NEXT_PUBLIC_IMAGE_KIT_PUBLIC_API_KEY,
-            privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,
-            urlEndpoint: process.env.IMAGE_KIT_URL_ENDPOINT
+        
+        const img = new ImageKit({
+            publicKey : process.env.NEXT_PUBLIC_IMAGE_KIT_PUBLIC_API_KEY,
+            privateKey : privKey,
+            urlEndpoint : endPoint  
         });
 
         const file = event.target[0].files[0]
         
-        img.upload({
+        await img.upload({
             file: file,
-            fileName: "22.png"
+            fileName: "22.png",
+            folder:"pruebas"
         }, function(error, result){
             if(error)console.log(error);
             else console.log(result)
         })
 
-        console.log(file)
-
-
-
-        
+        console.log(file)       
         
 
         /* const data = await supabaseAdmin
@@ -79,31 +76,19 @@ export default function RegisterVehicle({data}){
 }
 
 export async function getServerSideProps(){
-    const supabaseAdmin = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
-
-    const img = new ImageKit({
-        publicKey: process.env.NEXT_PUBLIC_IMAGE_KIT_PUBLIC_API_KEY,
-        privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,
-        urlEndpoint: process.env.IMAGE_KIT_URL_ENDPOINT
-    });
     
 
-    const data = {}
+    const privKey = process.env.IMAGE_KIT_PRIVATE_KEY
+    const endPoint = process.env.IMAGE_KIT_URL_ENDPOINT
 
-    /* const { data, error } = await supabaseAdmin
-    .storage
-    .from('avatars')
-    .upload('public/bici_1.jpg', file, {
-        contentType: 'images/bici_1.jpg'
-    }) */
+    const data = {}
 
     
     return {
         props:{
-            data
+            data,
+            privKey,
+            endPoint
         }
     }
 }
