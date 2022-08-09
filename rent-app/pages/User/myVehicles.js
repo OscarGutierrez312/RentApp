@@ -7,10 +7,13 @@ export default function MyVehicles({data}){
     console.log(data.data)
     return(
         <LayoutCatalogue>
-            <section className="overflow-hidden text-gray-700 mt-32 mb-60">
+            <section className="overflow-hidden text-gray-700 mt-80 mb-96">
                 <div className="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
-                    <div className="flex flex-wrap -m-1 md:-m-2">
-                        {data.data.map(function(i, idx){
+                    <div className="flex flex-wrap mb-96 md:-m-2">
+                        {data.data.length == 0 ? 
+                        <h1 className="text-7xl ">No tienes Vehículos Registrados</h1>
+                        :
+                        data.data.map(function(i, idx){
                             return(
                                 <div className="flex flex-wrap w-1/3">
                                     <div className="w-full p-1 md:p-2">
@@ -19,7 +22,9 @@ export default function MyVehicles({data}){
                                     </div>
                                 </div>
                             )
-                        })}
+                        })
+                        }
+                        
                     
                     </div>
                 </div>

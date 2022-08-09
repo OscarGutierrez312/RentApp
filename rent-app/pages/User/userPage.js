@@ -10,7 +10,7 @@ export default function userPage({ses}){
     return(
         <LayoutCatalogue>
             
-            <div className="container mt-44 px-6 mx-auto">
+            <div className="container my-56 px-6 mx-auto">
             
             <div className="flex mb-32">
                 <h1 className="text-6xl">Tu Usuario</h1>

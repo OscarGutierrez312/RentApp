@@ -5,16 +5,13 @@ import {createClient} from "@supabase/supabase-js"
 import LayoutCatalogue from "../../components/layout_catalogue";
 
 
-export default function Catalogue({data, catalogueId, reservas, days}){
-    //console.log(data.data[2].reserva.length)
-
-    
-    return (
-      <LayoutCatalogue>
+export default function Catalogue({filt}){
+    return(
+        <LayoutCatalogue>
         
 
         <div className="flex flex-col justify-center my-10 bg-blend-color">          
-          {data.data.map(function(i, idx){
+          {filt.data.map(function(i, idx){
             return (      
               <Link key={idx} href={"/Product/"+i.id_Vehiculo}>
                 <div key={idx} className="flex justify-center m-10 cursor-pointer">
@@ -28,7 +25,7 @@ export default function Catalogue({data, catalogueId, reservas, days}){
                       <p className="text-gray-600 text-xs">Precio: ${i.precio_Vehiculo}/Hora </p>
                     </div>
                     <div className="p-6 flex flex-col absolute inset-y-0 right-0">
-                      {data.data[idx].reserva.length == 0 ? <h5 className="text-xl font-medium mb-2 text-green-700">Disponible </h5>:
+                      {filt.data[idx].reserva.length == 0 ? <h5 className="text-xl font-medium mb-2 text-green-700">Disponible </h5>:
                       <h5 className="text-xl font-medium mb-2 text-red-300">Reservado </h5>}
                       
                     </div>
@@ -39,43 +36,21 @@ export default function Catalogue({data, catalogueId, reservas, days}){
           })}                       
         </div>
       </LayoutCatalogue>
-    );
-  }
+    )
+}
 
-
-export async function getServerSideProps({params}){
+export async function getServerSideProps({resolvedUrl}){
     
     const supabaseAdmin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
-    const days = []
+    const params = resolvedUrl.split("/")
 
-    const marcas = await supabaseAdmin
-    .from("Marca")
-    .select('*');
-    
-    const marc = marcas.data
-
-    marc.map(function(i, idx){
-      days.push([i.id_Marca, i.desc_Marca]);
-    })
-
-    console.log(days)
-
-    const catalogueId=params.catalogueId.replace(/\-/g, '+');
-
-    const tipoVehiculo = await supabaseAdmin
-    .from("Tipo_Vehiculo")
-    .select('*')
-    .eq('desc_Tipo', catalogueId);
-
-    const type = tipoVehiculo.data[0].id_Tipo;
-
-    const data = await supabaseAdmin
-    .from("Vehiculo")
-    .select(`
+    const filt = await supabaseAdmin
+      .from("Vehiculo")
+      .select(`
       *,
       modelo: Modelo(desc_Modelo),
       marca: Marca(desc_Marca), 
@@ -84,23 +59,12 @@ export async function getServerSideProps({params}){
       tipo:Tipo_Vehiculo(desc_Tipo),
       reserva: Reserva("estado_Reserva").eq("id_Vehiculo", id_Vehiculo)
     `)
-    .eq('id_Tipo_Vehiculo', type);
-
-    const reservas = await supabaseAdmin
-    .from("Reserva")
-    .select("estado_Reserva, id_Vehiculo")
-    .order("id_Vehiculo");
-
-    //console.log(data.data)
-
+      .filter("id_marca_Vehiculo", "in", "("+params[2]+")")
+      console.log(filt)
+      console.log(params)
     return{
         props:{
-            data,
-            catalogueId,
-            reservas, 
-            days
+            filt
         }
     }
-    
-  }
-  
+}
