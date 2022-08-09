@@ -1,6 +1,8 @@
 import NextAuth from "next-auth"
 import jwt from "next-auth/jwt"
 import GoogleProvider from "next-auth/providers/google"
+import FacebookProvider from "next-auth/providers/facebook"
+import TwitterProvider from "next-auth/providers/twitter"
 import CredentialsProvider from "next-auth/providers/credentials"
 import {createClient} from "@supabase/supabase-js"
 import { redirect } from "next/dist/server/api-utils"
@@ -17,6 +19,16 @@ export default NextAuth({
             clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
         }),
+
+        FacebookProvider({
+            clientId: process.env.FACEBOOK_CLIENT_ID,
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+        }),
+
+        TwitterProvider({
+            clientId: process.env.TWITTER_CLIENT_ID,
+            clientSecret: process.env.TWITTER_CLIENT_SECRET
+          }),
 
         CredentialsProvider({
             name: "Credentials",
@@ -120,7 +132,11 @@ export default NextAuth({
                 .toLocaleLowerCase();
             session.user.uid = token.sub
             return session;
-        }  
+        },
+
+        async error({error, redirect, redirectUrl}){
+            console.log(error, redirect, redirectUrl)
+        }
     }
 })
 
