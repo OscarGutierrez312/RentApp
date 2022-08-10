@@ -144,7 +144,7 @@ export default function RegisterVehicle({data, privKey, endPoint}){
                         </div>
                         <div className="flex justify-center">
                             <div className="mb-3 xl:w-96">
-                                <label for="exampleFormControlTextarea1" className="form-label inline-block mb-2 text-gray-700"
+                                <label htmlFor="exampleFormControlTextarea1" className="form-label inline-block mb-2 text-gray-700"
                                 >Descripción del Vehículo</label>
                                 <textarea
                                 className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
