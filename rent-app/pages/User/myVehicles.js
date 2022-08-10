@@ -15,7 +15,7 @@ export default function MyVehicles({data}){
                         :
                         data.data.map(function(i, idx){
                             return(
-                                <div className="flex flex-wrap w-1/3">
+                                <div className="flex flex-wrap w-1/3" key={idx}>
                                     <div className="w-full p-1 md:p-2">
                                     <img alt="gallery" className="block object-cover object-center w-full h-full rounded-lg"
                                         src={"https://ik.imagekit.io/servEasyCar"+i.imagen_Vehiculo}/>

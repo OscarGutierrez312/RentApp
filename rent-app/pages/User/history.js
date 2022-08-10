@@ -13,7 +13,7 @@ export default function History({historial}){
                 <ol className="border-l-2 border-purple-600 ml-10 mt-32 mb-52">
                     {historial.map(function(i, idx){
                         return(
-                            <li>
+                            <li key={idx}>
                                 <div className="md:flex flex-start">
                                 <div className="bg-purple-600 w-6 h-6 flex items-center justify-center rounded-full -ml-3">
                                     <svg aria-hidden="true" focusable="false" data-prefix="fas" className="text-white w-3 h-3" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

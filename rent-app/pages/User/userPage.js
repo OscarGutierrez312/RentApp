@@ -4,7 +4,7 @@ import LayoutCatalogue from "../../components/layout_catalogue";
 
 
 export default function userPage({ses}){
-    const {data:session} = useSession()
+    const {data:session} = useSession();
 
     //console.log(!session ? "undefined":session.user.image)
     return(
