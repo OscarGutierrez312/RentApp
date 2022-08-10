@@ -3,10 +3,10 @@ import Link from "next/link";
 import LayoutCatalogue from "../../components/layout_catalogue";
 
 
-export default function userPage({ses}){
+export default function UserPage({se}){
     const {data:session} = useSession();
 
-    //console.log(!session ? "undefined":session.user.image)
+    console.log(!session ? "undefined":session)
     return(
         <LayoutCatalogue>
             
