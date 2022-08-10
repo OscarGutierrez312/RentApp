@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Header(){
 
     return (
-    <footer className="text-white bg-gray-600" >
+    <footer className="flex flex-col mt-auto w-full absolute pt-[115px] text-white" >
       <div className="grid place-items-center bg-gray-200 p-6">    
         
         <a className="flex items-center text-gray-600 font-semibold"

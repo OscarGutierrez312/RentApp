@@ -98,7 +98,6 @@ export default function Reserv({product, lastUrl}){
         cost.current.innerText = "Costo: "+numberFormat2.format((diffHours*product.precio_Vehiculo))
     }
 
-
     const fields = async (event) => {
         event.preventDefault();
         const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);

@@ -109,7 +109,7 @@ export default function Login({providers, session, lastUrl}){
                                                 <div
                                                     className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
                                                 >
-                                                    <p className="text-center font-semibold mx-4 mb-0">OR</p>
+                                                    <p className="text-center font-semibold mx-4 mb-0">INGRESA CON:</p>
                                                 </div>
                                                 <div className=" button_google px-7 py-3 text-black font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
                                                     >                              
@@ -121,7 +121,7 @@ export default function Login({providers, session, lastUrl}){
                                                     >
                                                         <style jsx>{'.button_google:background-color: #3b5998'}</style>
                                                         <Image src="Util/google-g.svg" height={15} width={20}></Image>
-                                                        Continue with {providers["google"].name}
+                                                        Continuar con {providers["google"].name}
                                                     </a>
                                                 </div>
                                                 <div className=" button_google px-7 py-3 text-black font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
@@ -134,20 +134,7 @@ export default function Login({providers, session, lastUrl}){
                                                     >
                                                         <style jsx>{'.button_google:background-color: #3b5998'}</style>
                                                         <Image src="Util/facebook-g.svg" height={15} width={20}></Image>
-                                                        Continue with {providers["facebook"].name}
-                                                    </a>
-                                                </div>
-                                                <div className=" button_google px-7 py-3 text-black font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-                                                    >                              
-                                                    <a key={providers["twitter"].name}                                                            
-                                                        role="button"
-                                                        data-mdb-ripple="true"
-                                                        data-mdb-ripple-color="light"
-                                                        onClick={() => signIn(providers["twitter"].id, {callbackUrl: lastUrl || "/"})}
-                                                    >
-                                                        <style jsx>{'.button_google:background-color: #3b5998'}</style>
-                                                        <Image src="Util/facebook-g.svg" height={15} width={20}></Image>
-                                                        Continue with {providers["twitter"].name}
+                                                        Continuar con {providers["facebook"].name}
                                                     </a>
                                                 </div>
                                             </div>

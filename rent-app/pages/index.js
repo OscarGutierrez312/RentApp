@@ -55,7 +55,7 @@ export default function Home({days}) {
               
                       
           </form>
-      </div>
+        </div>
         <div className="grid grid-cols-2 pr-52 pl-52 pb-52">
           <Link href="/info/manual">
               <div className="col-span-2">
@@ -91,6 +91,25 @@ export default function Home({days}) {
                       y mucho mas puedes viajar tranquilo con los vehículos que se ofrecen en la plataforma.
                     </p>
                     <p className="text-gray-600 text-xs"> Aplica Condiciones y Restricciones</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/User/comments">
+            <div className="col-span-2">
+              <h2 className="text-7xl italic text-[#e8b984]">Comentarios, Sugerencias o Reporte de Errores</h2>
+              <div className="flex justify-center m-10 cursor-pointer">
+                <div className="flex flex-col min-w-fit min-h-fit max-w-lg md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg ring-2 ring-[#d3f5e6] hover:scale-110 transition duration-150 ease-in-out">
+                  <img className=" w-full h-96 md:h-auto object-cover md:w-48 md:rounded-none md:rounded-l-lg" src="/images/seguro.jpeg" alt="img"/>
+                  <div className="p-6 flex flex-col justify-start">
+                    <h5 className="text-gray-900 text-xl font-medium mb-2">Deja tu Comentario</h5>
+                    <p className="text-gray-700 text-base mb-4">
+                      Escribe aqui tus comentarios, sugerencias, peticiones, quejas, reclamos o reporta un error que hubieses presentado en el proceso de algunos de
+                      los servicios de nuetra plataforma
+                    </p>
+                    <p className="text-gray-600 text-xs">Sera de gran ayuda!</p>
                   </div>
                 </div>
               </div>
