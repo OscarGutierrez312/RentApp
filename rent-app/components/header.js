@@ -22,6 +22,7 @@ export default function Header(){
 
     return(
         <header className="z-0 mt-32">
+            
             <nav className="sidebar navbar-expand shadow-lg py-2 
             bg-white flex items-stretch w-full justify-between fixed top-0 right-0 left-0 z-10">
                 <div className="px-10 w-full flex flex-wrap items-center justify-between">

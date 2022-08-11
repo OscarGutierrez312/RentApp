@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import ImageKit from "imagekit";
 import {createClient} from "@supabase/supabase-js"
 import LayoutCatalogue from "../../components/layout_catalogue";
 
@@ -47,8 +46,11 @@ export async function getServerSideProps({resolvedUrl}){
     );
 
     const params = resolvedUrl.split("/")
-
-    const filt = await supabaseAdmin
+   
+    const vars=params[2].split("-")
+    console.log(vars)
+    
+    let filtq = supabaseAdmin
       .from("Vehiculo")
       .select(`
       *,
@@ -59,9 +61,15 @@ export async function getServerSideProps({resolvedUrl}){
       tipo:Tipo_Vehiculo(desc_Tipo),
       reserva: Reserva("estado_Reserva").eq("id_Vehiculo", id_Vehiculo)
     `)
-      .filter("id_marca_Vehiculo", "in", "("+params[2]+")")
-      console.log(filt)
-      console.log(params)
+    .filter(vars[0] == 0 ? "":"id_marca_Vehiculo", vars[0] == 0 ? "":"in", vars[0] == 0 ? "":"("+vars[0]+")")
+    .filter(vars[1] == 0 ? "":"id_Categoria", vars[1] == 0 ? "":"in", vars[1] == 0 ? "":"("+vars[1]+")")
+    if (vars[3] != 0 && vars[2] == '1'){filtq=filtq.lte("precio_Vehiculo", vars[3]).order("precio_Vehiculo", {ascending:false})}
+    if (vars[3] != 0 && vars[2] == '2'){filtq=filtq.gte("precio_Vehiculo", vars[3]).order("precio_Vehiculo", {ascending:false})}
+    
+    const filt = await filtq
+
+    console.log(filt)
+      
     return{
         props:{
             filt
