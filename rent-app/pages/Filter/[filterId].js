@@ -65,6 +65,7 @@ export async function getServerSideProps({resolvedUrl}){
     .filter(vars[1] == 0 ? "":"id_Categoria", vars[1] == 0 ? "":"in", vars[1] == 0 ? "":"("+vars[1]+")")
     if (vars[3] != 0 && vars[2] == '1'){filtq=filtq.lte("precio_Vehiculo", vars[3]).order("precio_Vehiculo", {ascending:false})}
     if (vars[3] != 0 && vars[2] == '2'){filtq=filtq.gte("precio_Vehiculo", vars[3]).order("precio_Vehiculo", {ascending:false})}
+    if (vars.length == 5){filtq=filtq.eq("id_Tipo_Vehiculo", vars[4] == "Vehicle" ? 1: vars[4] == "Motorbike" ? 2:3)}
     
     const filt = await filtq
 

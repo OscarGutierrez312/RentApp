@@ -1,7 +1,7 @@
 import {getSession, useSession } from "next-auth/react"
 import {createClient} from "@supabase/supabase-js"
 import LayoutCatalogue from "../../components/layout_catalogue";
-
+import Link from "next/link";
 
 export default function MyVehicles({data}){
     console.log(data.data)
@@ -15,13 +15,16 @@ export default function MyVehicles({data}){
                         :
                         data.data.map(function(i, idx){
                             return(
-                                <div className="flex flex-wrap w-1/3" key={idx}>
+                                <Link href={"/Product/"+i.id_Vehiculo}>
+                                <div className="flex flex-wrap w-1/3 cursor-pointer" key={idx}>
                                     <div className="w-full p-1 md:p-2">
-                                    <img alt="gallery" className="block object-cover object-center w-full h-full rounded-lg"
+                                    <img alt="gallery" className="block object-cover object-center w-full h-full rounded-lg hover:scale-105 transition ease-in-out"
                                         src={"https://ik.imagekit.io/servEasyCar"+i.imagen_Vehiculo}/>
                                     </div>
                                 </div>
-                            )
+                                </Link>
+                            )                               
+                                
                         })
                         }
                         
@@ -29,6 +32,80 @@ export default function MyVehicles({data}){
                     </div>
                 </div>
             </section>
+            <div className="flex flex-col">
+                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full">
+                        <thead className="border-b">
+                            <tr>
+                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                #
+                            </th>
+                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Tipo de Vahiculo
+                            </th>
+                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Marca
+                            </th>
+                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Modelo
+                            </th>
+                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Categoria
+                            </th>
+                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Precio
+                            </th>
+                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Calificación
+                            </th>
+                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Estado
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {data.data.map(function(i, idx){
+                            return(
+                                <tr className="border-b">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {idx+1}
+                                </td>
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {i.tipo.desc_Tipo == "Vehicle" ? "Vehiculo": i.tipo.desc_Tipo == "Motorbike" ? "Motocicleta":"Bicibleta"}
+                                </td>
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {i.marca.desc_Marca}
+                                </td>
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {i.modelo.desc_Modelo}
+                                </td>
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {i.categoria.desc_Categoria}
+                                </td>
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {i.precio_Vehiculo}
+                                </td>
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {i.Calificacion}
+                                </td>
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    Cell
+                                </td>
+                                
+                            </tr>
+                            )                               
+                                
+                        })
+                        }
+                            
+                        </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+                </div>
         </LayoutCatalogue>
             
     )
