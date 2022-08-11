@@ -1,14 +1,21 @@
 import Head from "next/head"
 import Link from "next/link"
 import {createClient} from "@supabase/supabase-js"
-import {useRef} from "react"
+import {useContext, useRef, getContext, useState} from "react"
 import Router from "next/router";
 import LayoutHome from "../components/layout_home"
 import Carousel from "../components/carousel"
+import ColorContext, { ColorProvider } from "../context/ColorContext"
 
 export default function Home({days}) {
   const opt = []
   const optCat = []
+
+  
+  
+
+    
+  
 
   const cat1 = useRef()
   days.map(function(i, idx){
@@ -32,7 +39,7 @@ export default function Home({days}) {
           cat1.current.options[idx+1] = new Option(i[1], i[0])
       })
   }
-
+  const [color, setColor] = useState(false)
   const fields = async (event) => {
     event.preventDefault()
     console.log(event.target[0].value)
@@ -42,7 +49,9 @@ export default function Home({days}) {
     Router.push("/Filter/"+event.target[0].value.split("-")[0]+"-"+event.target[1].value+"-"+event.target[2].value+"-"+event.target[3].value)
   }
   return (          
-    <LayoutHome>
+    <ColorProvider value={color}>
+      <LayoutHome>
+      
       <div className="z-auto m-2 divide-y-4 divide-black-200 divide-solid">
         <Head>
             <title>EasyCar</title>
@@ -56,6 +65,7 @@ export default function Home({days}) {
             lg:text-8xl
             mt-0 mb-6 text-[#98c8eb] hover:text-[#4a65eb] transition duration-150 ease-in-out">
                 Bienvenido a EasyCar</h1>
+             <h1>{color ? "true":"false"}</h1>   
             <h3 className="text-2xl font-thin mb-8 italic">
                 Pide o Arrienda cualquiera de 
             los tipos de vehiculos disponibles</h3>
@@ -203,11 +213,12 @@ export default function Home({days}) {
         </div>       
       </div>
     </LayoutHome>
+    </ColorProvider>
   )
 
 }
 export async function getServerSideProps({params}){
-    
+
   const supabaseAdmin = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.SUPABASE_SERVICE_ROLE_KEY

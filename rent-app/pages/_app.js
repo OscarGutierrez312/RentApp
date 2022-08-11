@@ -6,7 +6,7 @@ import '/styles/globals.css'
 
 function MyApp({ Component, pageProps:{session, ...pageProps}} ) {
   const [loading, setLoading] = React.useState(false);
-
+  
   Router.events.on('routeChangeStart', (url) => {
     setLoading(true);
    });
@@ -21,9 +21,14 @@ function MyApp({ Component, pageProps:{session, ...pageProps}} ) {
     {loading ?
       <LoaderPage/>
     :
-      <SessionProvider session={session} refetchInterval={0}>
-        <Component {...pageProps} />
+      
+      <SessionProvider session={session} refetchInterval={0} >
+        
+            <Component {...pageProps} />
+        
       </SessionProvider>
+      
+      
     }
     </>
     
