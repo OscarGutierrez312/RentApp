@@ -12,7 +12,7 @@ export default function LayoutInfo({ children }){
         
         <ColorProvider value={color}>
         <Header/> 
-        <div className="-mt-24 fixed z-10
+        <div className="-mt-32 fixed z-10
             lg:flex lg:flex-col lg:items-start lg:flex-1 lg:w-0 lg:ml-10 
             xl:items-center xl:ml-[50%] justify-end
             ">
