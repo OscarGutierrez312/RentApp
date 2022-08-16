@@ -15,7 +15,7 @@ export default function MyVehicles({data}){
                         :
                         data.data.map(function(i, idx){
                             return(
-                                <Link href={"/Product/"+i.id_Vehiculo}>
+                                <Link href={"/Product/"+i.id_Vehiculo} key={key}>
                                 <div className="flex flex-wrap w-1/3 cursor-pointer" key={idx}>
                                     <div className="w-full p-1 md:p-2">
                                     <img alt="gallery" className="block object-cover object-center w-full h-full rounded-lg hover:scale-105 transition ease-in-out"
