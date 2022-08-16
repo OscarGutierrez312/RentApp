@@ -2,9 +2,29 @@ import {getSession, useSession } from "next-auth/react"
 import {createClient} from "@supabase/supabase-js"
 import LayoutVehicles from "../../components/layout_vehicles";
 import Link from "next/link";
+import Router from "next/router";
 
 export default function MyVehicles({data, reservas}){
     //console.log(reservas.data[1].estado_Reserva)
+    const deleteVehicle = async (event) =>{
+        const supabaseAdmin = await createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL,
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        );
+    
+        const {result, error} = await supabaseAdmin
+        .from("Vehiculo")
+        .delete()
+        .match({"id_Vehiculo": event.target.id})
+    
+        if(error){
+          throw error
+        }else{
+          alert("vehiculo Eliminado")
+          Router.push("/User/myVehicles")
+        }
+        
+      }
     return(
         <LayoutVehicles>
             <section className="overflow-hidden text-gray-700 mt-80 mb-96">
@@ -93,6 +113,9 @@ export default function MyVehicles({data, reservas}){
                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                     {i.reserva.length == 0 ? "No Reservado" : i.reserva[0].estado_Reserva}
                                 </td>
+                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap cursor-pointer">
+                                    <img id={i.id_Vehiculo} className="max-w-30 max-h-14 hover:scale-95 transition ease-in-out" onClick={deleteVehicle} src="/images/delete.png" ></img>
+                                </td>
                                 
                             </tr>
                             )                               
@@ -150,10 +173,7 @@ export async function getServerSideProps(context){
         `)
         .eq('id_Usuario', user.data[0].id_Usuario);
         
-        data.data.map(function(i, idx){
-            console.log(i)
-            
-        })
+        
 
         return{
             props:{
