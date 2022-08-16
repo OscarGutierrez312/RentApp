@@ -21,7 +21,7 @@ export default class NextJsCarousel extends Component {
         ];
 		return (
             
-			<div className="flex flex-col  relative z-0 m-2 divide-y-4 divide-black-200 divide-solid">
+			<div className="flex flex-col  relative z-0 m-2 divide-y-4 divide-black-200 divide-solid" data-testid="tittle">
                 <div className="p-10">
                     <Carousel showArrows={true} showIndicators={false} stopOnHover showThumbs={false} infiniteLoop autoPlay>                
                         {data.map(function(i, idx){

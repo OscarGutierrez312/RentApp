@@ -180,7 +180,7 @@ export default function History({historial}){
         if(event.target.id == "Cancel"){
             const {upt, error} = await supabaseAdmin
                 .from("Reserva")
-                .update({estado_Reserva:"Terminada"})
+                .update({estado_Reserva:"Cancelada"})
                 .match({id_Reserva:reservId})
             if(error){
                 throw error
@@ -236,14 +236,14 @@ export default function History({historial}){
                                             
                                             <div className="flex items-center justify-center">
                                                 <div className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">
-                                                    {i.estado_Reserva == "Terminada" ?
+                                                    {i.estado_Reserva == "Terminada" || "Cancelada" ?
                                                     <></>
                                                     :
                                                     <button type="button" ref={btnCancelar} id={i.id_Reserva} onClick={cancel} className="rounded-l inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">
                                                         Cancelar
                                                     </button>
                                                     }
-                                                    {i.estado_Reserva == "Terminada" ?
+                                                    {i.estado_Reserva == "Terminada" || "Cancelada"?
                                                     <></>
                                                     :
                                                     <button type="button" ref={btnExtender} id={i.id_Reserva} onClick={extend} className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">

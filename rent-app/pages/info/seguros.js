@@ -3,7 +3,7 @@ import Link from "next/link"
 import LayoutInfo from "../../components/layout_info"
 
 
-export default function Manual(providers) {
+export default function Seguro(providers) {
     return(
         <LayoutInfo>
           <div className="container my-24 px-6 mx-auto">

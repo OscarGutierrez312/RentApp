@@ -3,8 +3,8 @@ import {createClient} from "@supabase/supabase-js"
 import LayoutVehicles from "../../components/layout_vehicles";
 import Link from "next/link";
 
-export default function MyVehicles({data}){
-    console.log(data.data)
+export default function MyVehicles({data, reservas}){
+    //console.log(reservas.data[1].estado_Reserva)
     return(
         <LayoutVehicles>
             <section className="overflow-hidden text-gray-700 mt-80 mb-96">
@@ -15,7 +15,7 @@ export default function MyVehicles({data}){
                         :
                         data.data.map(function(i, idx){
                             return(
-                                <Link href={"/Product/"+i.id_Vehiculo} key={key}>
+                                <Link href={"/Product/"+i.id_Vehiculo} key={idx}>
                                 <div className="flex flex-wrap w-1/3 cursor-pointer" key={idx}>
                                     <div className="w-full p-1 md:p-2">
                                     <img alt="gallery" className="block object-cover object-center w-full h-full rounded-lg hover:scale-105 transition ease-in-out"
@@ -91,7 +91,7 @@ export default function MyVehicles({data}){
                                     {i.Calificacion}
                                 </td>
                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                    Cell
+                                    {i.reserva.length == 0 ? "No Reservado" : i.reserva[0].estado_Reserva}
                                 </td>
                                 
                             </tr>
@@ -145,14 +145,20 @@ export async function getServerSideProps(context){
         marca: Marca(desc_Marca), 
         usuario: Usuario(nombre_Usuario, correo_Usuario),
         categoria: Categoria(desc_Categoria),
-        tipo:Tipo_Vehiculo(desc_Tipo)
+        tipo:Tipo_Vehiculo(desc_Tipo),
+        reserva:Reserva(estado_Reserva).eq("id_Vehiculo", id_Vehiculo)
         `)
         .eq('id_Usuario', user.data[0].id_Usuario);
         
+        data.data.map(function(i, idx){
+            console.log(i)
+            
+        })
 
         return{
             props:{
-                data
+                data,
+                
             }
         }
     }

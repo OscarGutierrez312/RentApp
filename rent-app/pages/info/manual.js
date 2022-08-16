@@ -10,7 +10,7 @@ export default function Manual(providers) {
               
 
               <section className="mb-32 text-gray-800">
-                <h2 align="center" className="text-7xl italic text-[#e8b984]">Manual de Solicitud</h2>
+                <h2 align="center" className="text-7xl italic text-[#e8b984]" >Manual de Solicitud</h2>
 
                 <div className="flex flex-wrap mb-12 md:mb-0">
                   <div className="grow-0 shrink-0 basis-auto w-2/12">

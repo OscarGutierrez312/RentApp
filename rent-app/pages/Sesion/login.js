@@ -45,7 +45,7 @@ export default function Login({providers, session, lastUrl}){
 
     return (
         <Layout>            
-            <div>
+            <div data-testid="title">
                 <section className="h-full gradient-form bg-gray-200 md:h-screen">
                     <div className="container py-12 px-6 h-full">
                         <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
