@@ -1,10 +1,31 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRef } from "react";
 import {createClient} from "@supabase/supabase-js"
+import { getSession, useSession } from "next-auth/react";
 import LayoutCatalogue from "../../components/layout_catalogue";
 
-export default function Product({product}){
-    //console.log(product)
+export default function Product({product, validate}){
+    console.log(validate)
+    const formName = useRef()
+    const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+    const changeName = async (event) =>{
+        formName.current.hidden == true ? formName.current.hidden = false:formName.current.hidden = true
+    }
+    const fields = async (event) => {
+      event.preventDefault();
+      const {upt, error} = await supabaseAdmin
+              .from("Vehiculo")
+              .update({desc_Vehiculo:event.target[0].value})
+              .match({id_Vehiculo:product.id_Vehiculo})
+          if(error){
+              throw error
+          }else{
+              console.log("Actualizado")
+              
+              formName.current.hidden=true
+          }
+  }
     return (
         <LayoutCatalogue>
         <div className="flex flex-col justify-center mt-20 bg-blend-color">          
@@ -29,7 +50,34 @@ export default function Product({product}){
                   disabled>
                   Reservado
                   </button>}
-                  
+                  <p className="text-xl">{product.desc_Vehiculo}</p>
+                  {validate ? 
+                  <div className="cursor-pointer ml-6" onClick={changeName}>
+                    <Image src="Util/edit.svg" height={15} width={20}></Image>
+                  </div>
+                  :<></>}
+                  <div className="inline-flex " role="group" >
+                        <form hidden={true} ref={formName} onSubmit={fields}>
+                            <div className="m-4">
+                                    <textarea
+                                    type="text"
+                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="exampleFormControlInput1"
+                                    placeholder="Ingrese Nueva Descripcion"
+                                    required/>
+                                </div>
+                                <div className="text-center pt-1 mb-12 pb-1">
+                                    <button
+                                    className="inline-block px-6 py-2.5 bg-blue-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                                    type="submit"
+                                    data-mdb-ripple="true"
+                                    data-mdb-ripple-color="light"
+                                    >
+                                    Actualizar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                   
                   {/* <button type="button" className="inline-block px-6 py-2.5 m-10 bg-cyan-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">
                     Solicitar</button>
@@ -50,9 +98,12 @@ export default function Product({product}){
 }
 
 
-export async function getServerSideProps({resolvedUrl}){
+export async function getServerSideProps(context){
 
-    const info=resolvedUrl.split("/");
+    const session = await getSession(context)
+
+
+    const info=context.resolvedUrl.split("/");
 
     const supabaseAdmin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -71,12 +122,25 @@ export async function getServerSideProps({resolvedUrl}){
       reserva: Reserva("estado_Reserva").eq("id_Vehiculo", id_Vehiculo)
     `)
     .eq('id_Vehiculo', info[2]);
+    var validate
+    if(session){
+      const val = await supabaseAdmin
+      .from("Usuario")
+      .select("id_Usuario")
+      .eq("correo_Usuario", session.user.email);
+      console.log(val.data)
+      validate = val.data[0].id_Usuario == data.data[0].id_Usuario ? true:false
+    }  
 
+    console.log(validate)
+
+    
     const product = data.data[0];
 
     return{
         props:{
-            product            
+            product,
+            validate            
         }
     }
     
