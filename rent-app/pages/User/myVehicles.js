@@ -4,7 +4,7 @@ import LayoutVehicles from "../../components/layout_vehicles";
 import Link from "next/link";
 import Router from "next/router";
 
-export default function MyVehicles({data, reservas}){
+export default function MyVehicles({data, sum}){
     //console.log(reservas.data[1].estado_Reserva)
     const deleteVehicle = async (event) =>{
         const supabaseAdmin = await createClient(
@@ -48,11 +48,15 @@ export default function MyVehicles({data, reservas}){
                         })
                         }
                         
-                    
+                        
                     </div>
+                    
                 </div>
+                
             </section>
+            <h2 className="text-md mx-48 my-28">Valor Obtenido de Arrendamientos=${sum}</h2>
             <div className="flex flex-col">
+            
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="overflow-x-auto">
@@ -173,11 +177,23 @@ export async function getServerSideProps(context){
         `)
         .eq('id_Usuario', user.data[0].id_Usuario);
         
-        
+        const data1 = await supabaseAdmin
+        .from("Reserva")
+        .select("valor_Reserva")
+        .eq('id_Usuario', user.data[0].id_Usuario)
 
+
+        var sum = 0
+
+        data1.data.map(function(i, idx){
+            sum+=i.valor_Reserva
+        })
+        
+        console.log(data1.data)
         return{
             props:{
                 data,
+                sum
                 
             }
         }
