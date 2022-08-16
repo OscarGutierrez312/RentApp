@@ -2,7 +2,7 @@ import Header from "./header"
 import Footer from "./footer"
 import { useState } from "react"
 import ColorContext, { ColorProvider } from "../context/ColorContext"
-export default function LayoutInfo({ children }){
+export default function LayoutUser({ children }){
     const [color, setColor] = useState(false)
     const colorChange = async (event) => {
         //console.log(event.target.checked)
@@ -12,7 +12,7 @@ export default function LayoutInfo({ children }){
         
         <ColorProvider value={color}>
         <Header/> 
-        <div className="-mt-24 fixed z-10
+        <div className="-mt-48 fixed z-10
             lg:flex lg:flex-col lg:items-start lg:flex-1 lg:w-0 lg:ml-10 
             xl:items-center xl:ml-[50%] justify-end
             ">

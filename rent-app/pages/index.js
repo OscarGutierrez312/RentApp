@@ -65,7 +65,7 @@ export default function Home({days}) {
             lg:text-8xl
             mt-0 mb-6 text-[#98c8eb] hover:text-[#4a65eb] transition duration-150 ease-in-out">
                 Bienvenido a EasyCar</h1>
-             <h1>{color ? "true":"false"}</h1>   
+             
             <h3 className="text-2xl font-thin mb-8 italic">
                 Pide o Arrienda cualquiera de 
             los tipos de vehiculos disponibles</h3>

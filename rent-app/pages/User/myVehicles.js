@@ -1,12 +1,12 @@
 import {getSession, useSession } from "next-auth/react"
 import {createClient} from "@supabase/supabase-js"
-import LayoutCatalogue from "../../components/layout_catalogue";
+import LayoutVehicles from "../../components/layout_vehicles";
 import Link from "next/link";
 
 export default function MyVehicles({data}){
     console.log(data.data)
     return(
-        <LayoutCatalogue>
+        <LayoutVehicles>
             <section className="overflow-hidden text-gray-700 mt-80 mb-96">
                 <div className="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
                     <div className="flex flex-wrap mb-96 md:-m-2">
@@ -43,7 +43,7 @@ export default function MyVehicles({data}){
                                 #
                             </th>
                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Tipo de Vahiculo
+                                Tipo de Vehiculo
                             </th>
                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 Marca
@@ -106,7 +106,7 @@ export default function MyVehicles({data}){
                     </div>
                 </div>
                 </div>
-        </LayoutCatalogue>
+        </LayoutVehicles>
             
     )
 }
