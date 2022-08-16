@@ -99,7 +99,8 @@ export default function RegisterVehicle({data, privKey, endPoint}){
                     id_Categoria:event.target["Categoria"].value,
                     Calificacion:0,
                     id_Tipo_Vehiculo:event.target["Tipo"].value,
-                    imagen_Vehiculo:result.filePath
+                    imagen_Vehiculo:result.filePath,
+                    desc_Vehiculo:event.target["descripcion"].value
                 }       
                 
                 let {error} = await supabaseAdmin.from('Vehiculo').upsert(update,{
@@ -218,7 +219,7 @@ export default function RegisterVehicle({data, privKey, endPoint}){
                                 className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
                                     border border-solid border-gray-300 rounded transition ease-in-out m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="exampleFormControlTextarea1"
+                                id="descripcion"
                                 rows="3"
                                 placeholder="Descripción"
                                 ></textarea>
